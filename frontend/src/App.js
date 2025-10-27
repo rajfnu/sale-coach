@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import Design from './Design';
+import Cost from './Cost';
+import Architecture from './Architecture';
 import AppContext from './AppContext';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('architecture');
 
   // Shared state between Design and Cost tabs
   const [salesCoachConfig, setSalesCoachConfig] = useState({
@@ -54,15 +57,39 @@ function App() {
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
           <div className="max-w-7xl mx-auto px-6 py-6">
             <h1 className="text-4xl font-bold">Sales AI Agent</h1>
-            <p className="text-blue-100 mt-2">AI-Powered Sales Coach Cost Calculator</p>
+            <p className="text-blue-100 mt-2">AI-Powered Sales Coach Design & Cost Calculator</p>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-white shadow-lg rounded-xl mt-6 mb-6">
+        {/* Tabs */}
+        <div className="max-w-7xl mx-auto px-6 mt-6">
+          <div className="bg-white shadow-lg rounded-xl">
+            <div className="border-b border-gray-200">
+              <div className="flex overflow-x-auto">
+                {[
+                  { id: 'architecture', name: 'SCIP Architecture', icon: 'Settings' },
+                  { id: 'design', name: 'Sales Coach Design', icon: 'Briefcase' },
+                  { id: 'cost', name: 'Cost Calculator', icon: 'DollarSign' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`px-6 py-4 font-medium transition-colors whitespace-nowrap ${
+                      activeTab === tab.id
+                        ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    }`}
+                  >
+                    {tab.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="p-6">
-              <Design />
+              {activeTab === 'architecture' && <Architecture />}
+              {activeTab === 'design' && <Design />}
+              {activeTab === 'cost' && <Cost />}
             </div>
           </div>
         </div>
