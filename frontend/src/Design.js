@@ -850,7 +850,13 @@ const Design = () => {
                 onChange={(e) => handleGlobalParamChange('assessments_per_user_per_month', parseInt(e.target.value))}
                 className="w-full"
               />
-              <p className="text-xs text-gray-500 mt-1">Typical: 10 deals × 4 assessments = 40/month</p>
+              <p className="text-xs text-gray-500 mt-1">
+                {(() => {
+                  const deals = Math.ceil(globalParams.assessments_per_user_per_month / 4);
+                  const assessmentsPerDeal = Math.round(globalParams.assessments_per_user_per_month / deals);
+                  return `Typical: ${deals} deals × ${assessmentsPerDeal} assessments = ${globalParams.assessments_per_user_per_month}/month`;
+                })()}
+              </p>
             </div>
           </div>
 
@@ -929,7 +935,7 @@ const Design = () => {
                         <h5 className="font-semibold text-gray-900">Assessments per User/Month</h5>
                         <p className="text-sm text-gray-600 mt-1">
                           How many 4Cs (Right-to-Win) assessments each user performs monthly.
-                          Typical: 10 deals × 4 assessments per deal = 40 assessments.
+                          Typical: {Math.ceil(globalParams.assessments_per_user_per_month / 4)} deals × {Math.round(globalParams.assessments_per_user_per_month / Math.ceil(globalParams.assessments_per_user_per_month / 4))} assessments per deal = {globalParams.assessments_per_user_per_month} assessments.
                         </p>
                         <p className="text-sm text-indigo-700 mt-2 font-medium">
                           Impact: Scales LLM costs linearly (2x assessments = 2x LLM costs)
