@@ -1260,13 +1260,13 @@ const Design = () => {
                     <div className="bg-white rounded-lg p-4 border border-indigo-300">
                       <div className="text-xs text-indigo-600 font-medium mb-1">Monthly Cost</div>
                       <div className="text-2xl font-bold text-indigo-900">
-                        ${agentCosts[activeAgent] ? agentCosts[activeAgent].toFixed(0) : '...'} AUD
+                        ${agentCosts[activeAgent] ? agentCosts[activeAgent].toFixed(0) : '...'}
                       </div>
                     </div>
                     <div className="bg-white rounded-lg p-4 border border-indigo-300">
                       <div className="text-xs text-indigo-600 font-medium mb-1">Annual Cost</div>
                       <div className="text-2xl font-bold text-indigo-900">
-                        ${agentCosts[activeAgent] ? (agentCosts[activeAgent] * 12).toFixed(0) : '...'} AUD
+                        ${agentCosts[activeAgent] ? (agentCosts[activeAgent] * 12).toFixed(0) : '...'}
                       </div>
                     </div>
                     <div className="bg-white rounded-lg p-3 border border-indigo-200">
