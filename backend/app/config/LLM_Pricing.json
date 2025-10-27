@@ -1,0 +1,1333 @@
+{
+  "lastUpdated": "2025-10-17",
+  "providers": {
+    "openai": {
+      "gpt-5": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 1.25,
+        "output": 10,
+        "cachedInput": 0.125
+      },
+      "gpt-5-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.25,
+        "output": 2,
+        "cachedInput": 0.025
+      },
+      "gpt-5-nano": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.05,
+        "output": 0.4,
+        "cachedInput": 0.005
+      },
+      "gpt-5-pro": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 15,
+        "output": 120
+      },
+      "gpt-4.1": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2,
+        "output": 8,
+        "cachedInput": 0.5
+      },
+      "gpt-4.1-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.4,
+        "output": 1.6,
+        "cachedInput": 0.1
+      },
+      "gpt-4.1-nano": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.1,
+        "output": 0.4,
+        "cachedInput": 0.025
+      },
+      "gpt-4o": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2.5,
+        "output": 10,
+        "cachedInput": 1.25
+      },
+      "gpt-4o-2024-05-13": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 5,
+        "output": 15
+      },
+      "gpt-4o-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.15,
+        "output": 0.6,
+        "cachedInput": 0.075
+      },
+      "o1": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 15,
+        "output": 60,
+        "cachedInput": 7.5
+      },
+      "o1-pro": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 150,
+        "output": 600
+      },
+      "o3-pro": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 20,
+        "output": 80
+      },
+      "o3": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2,
+        "output": 8,
+        "cachedInput": 0.5
+      },
+      "o3-deep-research": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 10,
+        "output": 40,
+        "cachedInput": 2.5
+      },
+      "o4-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 1.1,
+        "output": 4.4,
+        "cachedInput": 0.275
+      },
+      "o4-mini-deep-research": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2,
+        "output": 8,
+        "cachedInput": 0.5
+      },
+      "o3-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 1.1,
+        "output": 4.4,
+        "cachedInput": 0.55
+      },
+      "o1-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 1.1,
+        "output": 4.4,
+        "cachedInput": 0.55
+      },
+      "computer-use-preview": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 3,
+        "output": 12
+      },
+      "gpt-5-chat-latest": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 1.25,
+        "output": 10,
+        "cachedInput": 0.125
+      },
+      "gpt-5-codex": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 1.25,
+        "output": 10,
+        "cachedInput": 0.125
+      },
+      "gpt-realtime": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 4,
+        "output": 16,
+        "cachedInput": 0.4
+      },
+      "gpt-realtime-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.6,
+        "output": 2.4,
+        "cachedInput": 0.06
+      },
+      "gpt-4o-realtime-preview": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 5,
+        "output": 20,
+        "cachedInput": 2.5
+      },
+      "gpt-4o-mini-realtime-preview": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.6,
+        "output": 2.4,
+        "cachedInput": 0.3
+      },
+      "gpt-audio": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2.5,
+        "output": 10
+      },
+      "gpt-audio-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.6,
+        "output": 2.4
+      },
+      "gpt-4o-audio-preview": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2.5,
+        "output": 10
+      },
+      "gpt-4o-mini-audio-preview": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.15,
+        "output": 0.6
+      },
+      "codex-mini-latest": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 1.5,
+        "output": 6,
+        "cachedInput": 0.375
+      },
+      "gpt-4o-mini-search-preview": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 0.15,
+        "output": 0.6
+      },
+      "gpt-4o-search-preview": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2.5,
+        "output": 10
+      },
+      "gpt-image-1": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 5,
+        "cachedInput": 1.25
+      },
+      "gpt-image-1-mini": {
+        "category": "Text tokens",
+        "provider": "OpenAI",
+        "input": 2,
+        "cachedInput": 0.2
+      }
+    },
+    "anthropic": {
+      "claude-opus-4-1": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 15,
+        "output": 75,
+        "contextWindow": 200000,
+        "promptCachingWrite": 18.75,
+        "promptCachingRead": 1.5,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-opus-4": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 15,
+        "output": 75,
+        "contextWindow": 200000,
+        "promptCachingWrite": 18.75,
+        "promptCachingRead": 1.5,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-sonnet-4-5": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 3,
+        "output": 15,
+        "contextWindow": 200000,
+        "promptCachingWrite": 3.75,
+        "promptCachingRead": 0.3,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-sonnet-4": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 3,
+        "output": 15,
+        "contextWindow": 200000,
+        "promptCachingWrite": 3.75,
+        "promptCachingRead": 0.3,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-3-7-sonnet": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 3,
+        "output": 15,
+        "contextWindow": 200000,
+        "promptCachingWrite": 3.75,
+        "promptCachingRead": 0.3,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-3-5-sonnet": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 3,
+        "output": 15,
+        "contextWindow": 200000,
+        "promptCachingWrite": 3.75,
+        "promptCachingRead": 0.3,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-4-5-haiku": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 1,
+        "output": 5,
+        "contextWindow": 200000,
+        "promptCachingWrite": 1.25,
+        "promptCachingRead": 0.1,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-3-5-haiku": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 0.8,
+        "output": 4,
+        "contextWindow": 200000,
+        "promptCachingWrite": 1,
+        "promptCachingRead": 0.08,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-opus-3": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 15,
+        "output": 75,
+        "contextWindow": 200000,
+        "promptCachingWrite": 18.75,
+        "promptCachingRead": 1.5,
+        "batchProcessingDiscount": 0.5
+      },
+      "claude-3-haiku": {
+        "category": "Text Generation",
+        "provider": "Anthropic",
+        "input": 0.25,
+        "output": 1.25,
+        "contextWindow": 200000,
+        "promptCachingWrite": 0.3,
+        "promptCachingRead": 0.03,
+        "batchProcessingDiscount": 0.5
+      }
+    },
+    "gemini": {
+      "gemini-2.5-pro": {
+        "category": "Text Generation",
+        "provider": "Google",
+        "input": {
+          "small": 1.25,
+          "large": 2.5
+        },
+        "output": {
+          "small": 10,
+          "large": 15
+        },
+        "contextWindow": 1000000,
+        "contextCaching": {
+          "price": {
+            "small": 0.125,
+            "large": 0.25
+          },
+          "storage": 4.5
+        },
+        "groundingSearch": {
+          "freeRequests": 1500,
+          "price": 35
+        }
+      },
+      "gemini-2.5-flash": {
+        "category": "Text Generation",
+        "provider": "Google",
+        "input": {},
+        "output": 2.5,
+        "contextWindow": 1000000,
+        "contextCaching": {
+          "price": 0.03,
+          "storage": 1
+        },
+        "groundingSearch": {
+          "freeRequests": 1500,
+          "price": 35
+        }
+      },
+      "gemini-2.5-flash-preview": {
+        "category": "Text Generation",
+        "provider": "Google",
+        "input": {},
+        "output": 2.5,
+        "contextWindow": 1000000,
+        "contextCaching": {
+          "price": 0.03,
+          "storage": 1
+        },
+        "groundingSearch": {
+          "freeRequests": 1500,
+          "price": 35
+        }
+      },
+      "gemini-2.5-flash-lite": {
+        "category": "Text Generation",
+        "provider": "Google",
+        "input": {},
+        "output": 0.4,
+        "contextWindow": 1000000,
+        "contextCaching": {
+          "price": 0.025,
+          "storage": 1
+        },
+        "groundingSearch": {
+          "freeRequests": 1500,
+          "price": 35
+        }
+      },
+      "gemini-2.0-flash": {
+        "category": "Text Generation",
+        "provider": "Google",
+        "input": {},
+        "output": 0.4,
+        "contextWindow": 1000000,
+        "contextCaching": {
+          "price": 0.025,
+          "storage": 1
+        },
+        "groundingSearch": {
+          "freeRequests": 1500,
+          "price": 35
+        }
+      },
+      "gemini-1.5-flash-8b": {
+        "category": "Text Generation",
+        "provider": "Google",
+        "input": 0.075,
+        "output": 0.3,
+        "contextWindow": 1000000
+      },
+      "gemini-2.5-computer-use-preview-10-2025": {
+        "category": "Text Generation",
+        "provider": "Google",
+        "input": {
+          "small": 1.25,
+          "large": 2.5
+        },
+        "output": {
+          "small": 10,
+          "large": 15
+        },
+        "contextWindow": 1000000
+      }
+    },
+    "dalle": {
+      "gpt-image-1": {
+        "1024x1024-low": {
+          "price": 0.011,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536-low": {
+          "price": 0.016,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024-low": {
+          "price": 0.016,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1024-medium": {
+          "price": 0.042,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536-medium": {
+          "price": 0.063,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024-medium": {
+          "price": 0.063,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1024-high": {
+          "price": 0.167,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536-high": {
+          "price": 0.25,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024-high": {
+          "price": 0.25,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        }
+      },
+      "gpt-image-1-mini": {
+        "1024x1024-low": {
+          "price": 0.005,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536-low": {
+          "price": 0.006,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024-low": {
+          "price": 0.006,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1024-medium": {
+          "price": 0.011,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536-medium": {
+          "price": 0.015,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024-medium": {
+          "price": 0.015,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1024-high": {
+          "price": 0.036,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536-high": {
+          "price": 0.052,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024-high": {
+          "price": 0.052,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        }
+      },
+      "dall-e-3": {
+        "1024x1024": {
+          "price": 0.04,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536": {
+          "price": 0.08,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024": {
+          "price": 0.08,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1024-hd": {
+          "price": 0.08,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536-hd": {
+          "price": 0.12,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024-hd": {
+          "price": 0.12,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        }
+      },
+      "dall-e-2": {
+        "1024x1024": {
+          "price": 0.016,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1024x1536": {
+          "price": 0.018,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        },
+        "1536x1024": {
+          "price": 0.02,
+          "category": "Image Generation",
+          "provider": "OpenAI",
+          "unit": "per image"
+        }
+      }
+    },
+    "embedding": {
+      "text-embedding-3-small": {
+        "price": 0.02,
+        "context": "8K tokens",
+        "category": "Embedding",
+        "provider": "OpenAI",
+        "unit": "per 1M tokens"
+      },
+      "text-embedding-3-large": {
+        "price": 0.13,
+        "context": "8K tokens",
+        "category": "Embedding",
+        "provider": "OpenAI",
+        "unit": "per 1M tokens"
+      },
+      "text-embedding-ada-002": {
+        "price": 0.1,
+        "context": "8K tokens",
+        "category": "Embedding",
+        "provider": "OpenAI",
+        "unit": "per 1M tokens"
+      }
+    },
+    "audio": {
+      "whisper": {
+        "price": 0.006,
+        "category": "Audio Transcription",
+        "provider": "OpenAI",
+        "unit": "per minute"
+      },
+      "tts": {
+        "price": 15,
+        "category": "Text to Speech",
+        "provider": "OpenAI",
+        "unit": "per 1M characters"
+      },
+      "tts-hd": {
+        "price": 30,
+        "category": "Text to Speech",
+        "provider": "OpenAI",
+        "unit": "per 1M characters"
+      }
+    },
+    "cohere": {
+      "command": {
+        "category": "Text Generation",
+        "provider": "Cohere",
+        "input": 1,
+        "output": 2
+      },
+      "command-light": {
+        "category": "Text Generation",
+        "provider": "Cohere",
+        "input": 0.3,
+        "output": 0.6
+      },
+      "command-r": {
+        "category": "Text Generation",
+        "provider": "Cohere",
+        "input": 0.5,
+        "output": 1.5
+      },
+      "command-r-plus": {
+        "category": "Text Generation",
+        "provider": "Cohere",
+        "input": 2.5,
+        "output": 10
+      },
+      "aya-expanse-8b": {
+        "category": "Text Generation",
+        "provider": "Cohere",
+        "input": 0.5,
+        "output": 1.5
+      },
+      "aya-expanse-32b": {
+        "category": "Text Generation",
+        "provider": "Cohere",
+        "input": 0.5,
+        "output": 1.5
+      }
+    },
+    "perplexity": {
+      "sonar": {
+        "category": "Text Generation",
+        "provider": "Perplexity.ai",
+        "input": 1,
+        "output": 1
+      },
+      "sonar-pro": {
+        "category": "Text Generation",
+        "provider": "Perplexity.ai",
+        "input": 3,
+        "output": 15
+      },
+      "sonar-reasoning": {
+        "category": "Text Generation",
+        "provider": "Perplexity.ai",
+        "input": 1,
+        "output": 5
+      },
+      "sonar-reasoning-pro": {
+        "category": "Text Generation",
+        "provider": "Perplexity.ai",
+        "input": 2,
+        "output": 8
+      },
+      "sonar-deep-research": {
+        "category": "Text Generation",
+        "provider": "Perplexity.ai",
+        "input": 2,
+        "output": 8,
+        "cachedInput": 2,
+        "reasoning": 3,
+        "searchPrice": 5
+      }
+    },
+    "imagen": {
+      "imagen-4-fast": {
+        "price": 0.02,
+        "category": "Image Generation",
+        "provider": "Google",
+        "unit": "per image"
+      },
+      "imagen-4": {
+        "price": 0.04,
+        "category": "Image Generation",
+        "provider": "Google",
+        "unit": "per image"
+      },
+      "imagen-4-ultra": {
+        "price": 0.06,
+        "category": "Image Generation",
+        "provider": "Google",
+        "unit": "per image"
+      },
+      "imagen-3": {
+        "price": 0.03,
+        "category": "Image Generation",
+        "provider": "Google",
+        "unit": "per image"
+      }
+    }
+  },
+  "additionalProviders": {
+    "mistral": {
+      "provider": "Mistral",
+      "catalogUrl": "https://docs.mistral.ai/platform/pricing/",
+      "models": [
+        {
+          "id": "mistral-small",
+          "name": "Mistral Small",
+          "category": "Text tokens",
+          "provider": "Mistral",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 1,
+              "output": 3,
+              "description": "Usage-based API pricing"
+            }
+          ],
+          "url": "https://docs.mistral.ai/platform/pricing/",
+          "notes": "Pricing last verified 2024-08 from Mistral API docs.",
+          "tags": [
+            "general"
+          ]
+        },
+        {
+          "id": "mistral-medium",
+          "name": "Mistral Medium",
+          "category": "Text tokens",
+          "provider": "Mistral",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 2.7,
+              "output": 8.1,
+              "description": "Balanced cost-performance tier"
+            }
+          ],
+          "url": "https://docs.mistral.ai/platform/pricing/",
+          "notes": "Pricing last verified 2024-08.",
+          "tags": [
+            "general"
+          ]
+        },
+        {
+          "id": "mistral-large",
+          "name": "Mistral Large",
+          "category": "Text tokens",
+          "provider": "Mistral",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 8,
+              "output": 24,
+              "description": "Flagship reasoning-capable model"
+            }
+          ],
+          "url": "https://docs.mistral.ai/platform/pricing/",
+          "notes": "Pricing last verified 2024-08.",
+          "tags": [
+            "reasoning"
+          ]
+        },
+        {
+          "id": "codestral",
+          "name": "Codestral",
+          "category": "Code generation",
+          "provider": "Mistral",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 1,
+              "output": 3,
+              "description": "Code-specialised usage pricing"
+            }
+          ],
+          "url": "https://docs.mistral.ai/platform/pricing/",
+          "notes": "Pricing last verified 2024-08.",
+          "tags": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "groq": {
+      "provider": "Groq",
+      "catalogUrl": "https://console.groq.com/docs/pricing",
+      "models": [
+        {
+          "id": "groq-llama3-8b",
+          "name": "Llama 3 8B (Groq)",
+          "category": "Text tokens",
+          "provider": "Groq",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 0.05,
+              "output": 0.08,
+              "description": "Ultra-low latency tier"
+            }
+          ],
+          "url": "https://console.groq.com/docs/pricing",
+          "notes": "Latency guarantees typically <200ms for 8B; pricing captured 2024-09.",
+          "tags": [
+            "low-latency"
+          ]
+        },
+        {
+          "id": "groq-llama3-70b",
+          "name": "Llama 3 70B (Groq)",
+          "category": "Text tokens",
+          "provider": "Groq",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 0.59,
+              "output": 0.79,
+              "description": "High-accuracy, hardware-accelerated tier"
+            },
+            {
+              "type": "compute",
+              "unit": "perSecond",
+              "price": 0.000002,
+              "description": "Effective per-second compute with 500 tok/s target"
+            }
+          ],
+          "url": "https://console.groq.com/docs/pricing",
+          "notes": "Pricing captured 2024-09; compute estimate derived from Groq docs.",
+          "tags": [
+            "latency-sla",
+            "reasoning"
+          ]
+        },
+        {
+          "id": "groq-mixtral-8x7b",
+          "name": "Mixtral 8x7B (Groq)",
+          "category": "Text tokens",
+          "provider": "Groq",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 0.27,
+              "output": 0.4,
+              "description": "Mixture-of-experts with deterministic throughput"
+            }
+          ],
+          "url": "https://console.groq.com/docs/pricing",
+          "notes": "Pricing captured 2024-09.",
+          "tags": [
+            "mixture-of-experts"
+          ]
+        }
+      ]
+    },
+    "meta-marketplaces": {
+      "provider": "Meta Llama (Third-Party)",
+      "catalogUrl": "https://llama.meta.com/",
+      "models": [
+        {
+          "id": "fireworks-llama3-70b",
+          "name": "Llama 3 70B (Fireworks)",
+          "category": "Marketplace tokens",
+          "provider": "Meta Llama",
+          "vendor": "Fireworks AI",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 0.8,
+              "output": 0.8,
+              "description": "Serverless pricing via Fireworks workspace"
+            }
+          ],
+          "url": "https://fireworks.ai/pricing",
+          "notes": "Representative Fireworks pay-as-you-go pricing, 2024-09. Volume tiers available.",
+          "tags": [
+            "marketplace"
+          ]
+        },
+        {
+          "id": "together-llama3-70b",
+          "name": "Llama 3 70B (Together AI)",
+          "category": "Marketplace tokens",
+          "provider": "Meta Llama",
+          "vendor": "Together AI",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 0.69,
+              "output": 0.99,
+              "description": "On-demand serverless"
+            },
+            {
+              "type": "compute",
+              "unit": "perHour",
+              "price": 3.9,
+              "description": "Dedicated GPU hourly rate via Together deployments"
+            }
+          ],
+          "url": "https://www.together.ai/pricing",
+          "notes": "Pricing captured 2024-09; dedicated rates vary by reservation length.",
+          "tags": [
+            "marketplace",
+            "dedicated"
+          ]
+        },
+        {
+          "id": "runpod-llama3-8b",
+          "name": "Llama 3 8B (RunPod)",
+          "category": "Marketplace tokens",
+          "provider": "Meta Llama",
+          "vendor": "RunPod",
+          "modes": [
+            {
+              "type": "compute",
+              "unit": "perHour",
+              "price": 1.5,
+              "description": "A40 48GB dedicated pod hourly estimate"
+            },
+            {
+              "type": "range",
+              "unit": "per1Mtokens",
+              "min": 0.3,
+              "max": 0.5,
+              "description": "Effective per-token cost based on typical throughput"
+            }
+          ],
+          "url": "https://www.runpod.io/marketplace/pricing",
+          "notes": "Token-equivalent pricing calculated from RunPod A40 pod throughput, 2024-09.",
+          "tags": [
+            "marketplace",
+            "dedicated"
+          ]
+        }
+      ]
+    },
+    "xai-grok": {
+      "provider": "xAI",
+      "catalogUrl": "https://x.ai/",
+      "models": [
+        {
+          "id": "grok-premium",
+          "name": "Grok via X Premium",
+          "category": "Subscription",
+          "provider": "xAI",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 8,
+              "description": "X Premium annual-equivalent pricing",
+              "usageIncluded": "Access to Grok with standard rate limits",
+              "features": [
+                "General availability",
+                "Limited rate limits"
+              ]
+            }
+          ],
+          "url": "https://help.twitter.com/en/using-x/x-premium",
+          "notes": "X Premium billed at $8/mo when paid annually (or $11 month-to-month); Grok availability subject to regional rollout.",
+          "tags": [
+            "subscription"
+          ]
+        },
+        {
+          "id": "grok-premium-plus",
+          "name": "Grok via X Premium+",
+          "category": "Subscription",
+          "provider": "xAI",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 16,
+              "description": "X Premium+ monthly plan",
+              "usageIncluded": "Priority Grok access & highest rate limits",
+              "features": [
+                "No ads on X",
+                "Full Grok feature set",
+                "Higher request caps"
+              ]
+            }
+          ],
+          "url": "https://help.twitter.com/en/using-x/x-premium",
+          "notes": "Pricing captured 2024-09.",
+          "tags": [
+            "subscription",
+            "premium"
+          ]
+        }
+      ]
+    },
+    "stability-ai": {
+      "provider": "Stability AI",
+      "catalogUrl": "https://stability.ai/pricing",
+      "models": [
+        {
+          "id": "stability-standard-plan",
+          "name": "Stable Diffusion Standard",
+          "category": "Subscription",
+          "provider": "Stability AI",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 27,
+              "description": "Standard membership",
+              "usageIncluded": "500 credits/month",
+              "features": [
+                "Commercial usage",
+                "Member gallery"
+              ]
+            },
+            {
+              "type": "credit",
+              "unit": "perCredit",
+              "price": 0.054,
+              "creditsIncluded": 500,
+              "description": "Effective credit rate within plan"
+            }
+          ],
+          "url": "https://stability.ai/pricing",
+          "notes": "Pricing captured 2024-08; credit usage varies by model.",
+          "tags": [
+            "subscription",
+            "image"
+          ]
+        },
+        {
+          "id": "stability-pro-plan",
+          "name": "Stable Diffusion Pro",
+          "category": "Subscription",
+          "provider": "Stability AI",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 99,
+              "description": "Pro membership tier",
+              "usageIncluded": "2,000 credits/month",
+              "features": [
+                "Highest priority",
+                "Custom style builder",
+                "Team seat management"
+              ]
+            },
+            {
+              "type": "credit",
+              "unit": "perCredit",
+              "price": 0.0495,
+              "creditsIncluded": 2000,
+              "description": "Effective credit rate within plan"
+            }
+          ],
+          "url": "https://stability.ai/pricing",
+          "notes": "Pricing captured 2024-08.",
+          "tags": [
+            "subscription",
+            "image"
+          ]
+        },
+        {
+          "id": "stability-payg",
+          "name": "Stable Diffusion Pay-as-you-go",
+          "category": "Credits",
+          "provider": "Stability AI",
+          "modes": [
+            {
+              "type": "credit",
+              "unit": "perBundle",
+              "price": 10,
+              "creditsIncluded": 100,
+              "description": "One-time credit pack"
+            }
+          ],
+          "url": "https://stability.ai/pricing",
+          "notes": "Bundles from $10 for 100 credits; larger packs offer discounts.",
+          "tags": [
+            "credits",
+            "image"
+          ]
+        }
+      ]
+    },
+    "midjourney": {
+      "provider": "Midjourney",
+      "catalogUrl": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans",
+      "models": [
+        {
+          "id": "midjourney-basic",
+          "name": "Midjourney Basic",
+          "category": "Subscription",
+          "provider": "Midjourney",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 10,
+              "description": "Basic plan, billed monthly",
+              "usageIncluded": "3.3 fast-hours, unlimited relaxed",
+              "features": [
+                "General commercial terms",
+                "Community galleries"
+              ]
+            }
+          ],
+          "url": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans",
+          "notes": "Annual billing discounts available; plan includes ~200 fast minutes.",
+          "tags": [
+            "subscription",
+            "image"
+          ]
+        },
+        {
+          "id": "midjourney-standard",
+          "name": "Midjourney Standard",
+          "category": "Subscription",
+          "provider": "Midjourney",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 30,
+              "description": "Most popular tier",
+              "usageIncluded": "15 fast-hours + unlimited relaxed",
+              "features": [
+                "Stealth mode add-on",
+                "Max 3 concurrent jobs"
+              ]
+            }
+          ],
+          "url": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans",
+          "notes": "Annual plan averages $24/month.",
+          "tags": [
+            "subscription",
+            "image"
+          ]
+        },
+        {
+          "id": "midjourney-pro",
+          "name": "Midjourney Pro",
+          "category": "Subscription",
+          "provider": "Midjourney",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 60,
+              "description": "Professional tier",
+              "usageIncluded": "30 fast-hours + unlimited relaxed",
+              "features": [
+                "Stealth mode included",
+                "Max 12 concurrent jobs"
+              ]
+            }
+          ],
+          "url": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans",
+          "notes": "Annual plan averages $48/month.",
+          "tags": [
+            "subscription",
+            "image"
+          ]
+        },
+        {
+          "id": "midjourney-mega",
+          "name": "Midjourney Mega",
+          "category": "Subscription",
+          "provider": "Midjourney",
+          "modes": [
+            {
+              "type": "subscription",
+              "unit": "perMonth",
+              "price": 120,
+              "description": "High-volume studio tier",
+              "usageIncluded": "60 fast-hours + priority queues",
+              "features": [
+                "Stealth mode",
+                "Max 12 concurrent jobs"
+              ]
+            }
+          ],
+          "url": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans",
+          "notes": "Annual plan averages $96/month.",
+          "tags": [
+            "subscription",
+            "image"
+          ]
+        }
+      ]
+    },
+    "openrouter": {
+      "provider": "OpenRouter",
+      "catalogUrl": "https://openrouter.ai/pricing",
+      "models": [
+        {
+          "id": "openrouter-llama3-70b",
+          "name": "Llama 3 70B (OpenRouter)",
+          "category": "Marketplace tokens",
+          "provider": "OpenRouter",
+          "modes": [
+            {
+              "type": "range",
+              "unit": "per1Mtokens",
+              "min": 0.6,
+              "max": 0.85,
+              "description": "Varies by upstream host; excludes marketplace fee"
+            },
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 0.6,
+              "output": 0.75,
+              "description": "Representative default route pricing"
+            }
+          ],
+          "url": "https://openrouter.ai/pricing",
+          "notes": "Pricing captured 2024-09; expect ±10% fluctuation. Include markup when comparing to direct providers.",
+          "tags": [
+            "marketplace"
+          ]
+        },
+        {
+          "id": "openrouter-gpt-4o",
+          "name": "GPT-4o (OpenRouter)",
+          "category": "Marketplace tokens",
+          "provider": "OpenRouter",
+          "modes": [
+            {
+              "type": "range",
+              "unit": "per1Mtokens",
+              "min": 2.5,
+              "max": 4.5,
+              "description": "Depends on selected route and availability"
+            }
+          ],
+          "url": "https://openrouter.ai/pricing",
+          "notes": "Route selection can change pricing dynamically; consider cached-token rates when available.",
+          "tags": [
+            "marketplace"
+          ]
+        },
+        {
+          "id": "openrouter-mixtral-8x7b",
+          "name": "Mixtral 8x7B (OpenRouter)",
+          "category": "Marketplace tokens",
+          "provider": "OpenRouter",
+          "modes": [
+            {
+              "type": "token",
+              "unit": "per1Mtokens",
+              "input": 0.3,
+              "output": 0.6,
+              "description": "Representative default route"
+            }
+          ],
+          "url": "https://openrouter.ai/pricing",
+          "notes": "Pricing captured 2024-09.",
+          "tags": [
+            "marketplace",
+            "moe"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,998 @@
+# ============================================================================
+# AI AGENT PLATFORM - PRICING CONFIGURATION
+# ============================================================================
+# Last Updated: 2025-01-22
+# Update Frequency: Monthly or when vendor pricing changes
+#
+# Instructions:
+# 1. Manually verify and update prices from official vendor portals
+# 2. Always include 'last_verified' date for audit trail
+# 3. Currency conversions: Use current exchange rates
+# 4. Add 'notes' field for important pricing details
+# ============================================================================
+
+metadata:
+  version: "2.1"
+  last_updated: "2025-01-22"
+  default_currency: "AUD"
+  exchange_rates:
+    usd_to_aud: 1.54  # 1 USD = 1.54 AUD (update monthly)
+    eur_to_aud: 1.68
+    gbp_to_aud: 1.96
+
+# ============================================================================
+# CLOUD PROVIDERS - COMPUTE
+# ============================================================================
+
+azure:
+  region: "australiaeast"  # Sydney
+  last_verified: "2025-01-22"
+
+  compute:
+    virtual_machines:
+      # Standard D-series v5 (General Purpose)
+      - sku: "Standard_D4s_v5"
+        vcpus: 4
+        memory_gb: 16
+        pricing:
+          payg_per_hour_aud: 0.288
+          reserved_1yr_per_hour_aud: 0.173
+          reserved_3yr_per_hour_aud: 0.115
+        notes: "Good for small workloads"
+
+      - sku: "Standard_D8s_v5"
+        vcpus: 8
+        memory_gb: 32
+        pricing:
+          payg_per_hour_aud: 0.576
+          reserved_1yr_per_hour_aud: 0.346
+          reserved_3yr_per_hour_aud: 0.230
+        notes: "Recommended for most agents"
+
+      - sku: "Standard_D16s_v5"
+        vcpus: 16
+        memory_gb: 64
+        pricing:
+          payg_per_hour_aud: 1.152
+          reserved_1yr_per_hour_aud: 0.691
+          reserved_3yr_per_hour_aud: 0.461
+        notes: "For heavy workloads (Neo4j, large DBs)"
+
+      # GPU VMs (NC-series v3 with NVIDIA V100)
+      - sku: "Standard_NC6s_v3"
+        vcpus: 6
+        memory_gb: 112
+        gpus: 1
+        gpu_model: "NVIDIA V100"
+        pricing:
+          payg_per_hour_aud: 4.20
+          reserved_1yr_per_hour_aud: 2.52
+          reserved_3yr_per_hour_aud: 1.68
+        notes: "For self-hosted LLMs (not recommended for SCIP)"
+
+      - sku: "Standard_NC12s_v3"
+        vcpus: 12
+        memory_gb: 224
+        gpus: 2
+        gpu_model: "NVIDIA V100"
+        pricing:
+          payg_per_hour_aud: 8.40
+          reserved_1yr_per_hour_aud: 5.04
+          reserved_3yr_per_hour_aud: 3.36
+        notes: "For large self-hosted models"
+
+  kubernetes:
+    aks_management_per_hour_aud: 0.15
+    load_balancer_per_month_aud: 30.00
+    ingress_controller_per_month_aud: 20.00
+
+  storage:
+    adls_gen2:
+      hot_per_gb_month_aud: 0.025
+      cool_per_gb_month_aud: 0.015
+      archive_per_gb_month_aud: 0.002
+    blob_storage:
+      hot_per_gb_month_aud: 0.0234
+      cool_per_gb_month_aud: 0.0128
+      archive_per_gb_month_aud: 0.0020
+    managed_disks:
+      premium_ssd_p30_per_month_aud: 165.00  # 1TB
+      standard_ssd_e30_per_month_aud: 123.00  # 1TB
+
+  database:
+    azure_sql:
+      gen5_vcore_per_hour_aud: 0.5865
+      business_critical_vcore_per_hour_aud: 1.173
+    cosmos_db:
+      ru_per_100_per_hour_aud: 0.012
+      serverless_ru_per_million_aud: 0.30
+    postgresql:
+      flexible_vcore_per_hour_aud: 0.488
+    redis_cache:
+      c0_250mb_per_hour_aud: 0.024
+      c1_1gb_per_hour_aud: 0.096
+      c2_2_5gb_per_hour_aud: 0.228
+      c6_6gb_per_hour_aud: 0.765
+      p1_6gb_per_hour_aud: 1.147  # Premium tier
+
+  networking:
+    api_management:
+      developer_per_month_aud: 56.00
+      standard_per_month_aud: 785.00
+      premium_per_month_aud: 3500.00
+    application_gateway:
+      v2_per_hour_aud: 0.315
+      waf_v2_per_hour_aud: 0.473
+    front_door:
+      standard_base_per_month_aud: 35.00
+      premium_base_per_month_aud: 420.00
+    firewall:
+      standard_per_hour_aud: 1.575
+      premium_per_hour_aud: 0.98
+
+  monitoring:
+    log_analytics_per_gb_aud: 3.50
+    application_insights_per_gb_aud: 3.25
+    data_export_per_gb_aud: 0.15
+
+  functions:
+    consumption_per_million_executions_aud: 0.30
+    premium_ep1_per_hour_aud: 0.252
+    premium_ep2_per_hour_aud: 0.504
+
+  other:
+    service_bus_basic_per_month_aud: 0.077
+    event_hub_basic_per_month_aud: 16.94
+    databricks_all_purpose_dbu_aud: 0.75
+
+aws:
+  region: "ap-southeast-2"  # Sydney
+  last_verified: "2025-01-22"
+
+  compute:
+    ec2:
+      # T3 instances (Burstable)
+      - type: "t3.medium"
+        vcpus: 2
+        memory_gb: 4
+        pricing:
+          on_demand_per_hour_usd: 0.0528
+          reserved_1yr_per_hour_usd: 0.0316
+
+      # M6i instances (General Purpose)
+      - type: "m6i.xlarge"
+        vcpus: 4
+        memory_gb: 16
+        pricing:
+          on_demand_per_hour_usd: 0.23
+          reserved_1yr_per_hour_usd: 0.138
+
+      - type: "m6i.2xlarge"
+        vcpus: 8
+        memory_gb: 32
+        pricing:
+          on_demand_per_hour_usd: 0.46
+          reserved_1yr_per_hour_usd: 0.276
+
+      # GPU instances
+      - type: "g5.xlarge"
+        vcpus: 4
+        memory_gb: 16
+        gpus: 1
+        gpu_model: "NVIDIA A10G"
+        pricing:
+          on_demand_per_hour_usd: 1.006
+          reserved_1yr_per_hour_usd: 0.604
+
+  storage:
+    s3:
+      standard_per_gb_month_usd: 0.023
+      infrequent_access_per_gb_month_usd: 0.0125
+      glacier_per_gb_month_usd: 0.004
+    ebs:
+      gp3_per_gb_month_usd: 0.08
+      io2_per_gb_month_usd: 0.125
+
+  database:
+    rds_postgresql:
+      db_m6i_xlarge_per_hour_usd: 0.252
+    dynamodb:
+      on_demand_write_per_million_usd: 1.25
+      on_demand_read_per_million_usd: 0.25
+    elasticache_redis:
+      cache_m6g_large_per_hour_usd: 0.136
+
+gcp:
+  region: "australia-southeast1"  # Sydney
+  last_verified: "2025-01-22"
+
+  compute:
+    compute_engine:
+      # N2 standard instances
+      - type: "n2-standard-4"
+        vcpus: 4
+        memory_gb: 16
+        pricing:
+          on_demand_per_hour_usd: 0.194
+          committed_1yr_per_hour_usd: 0.139
+
+      - type: "n2-standard-8"
+        vcpus: 8
+        memory_gb: 32
+        pricing:
+          on_demand_per_hour_usd: 0.388
+          committed_1yr_per_hour_usd: 0.278
+
+      # GPU instances
+      - type: "a2-highgpu-1g"
+        vcpus: 12
+        memory_gb: 85
+        gpus: 1
+        gpu_model: "NVIDIA A100"
+        pricing:
+          on_demand_per_hour_usd: 3.673
+          committed_1yr_per_hour_usd: 2.631
+
+  storage:
+    cloud_storage:
+      standard_per_gb_month_usd: 0.020
+      nearline_per_gb_month_usd: 0.010
+      coldline_per_gb_month_usd: 0.004
+
+  database:
+    cloud_sql_postgresql:
+      db_n1_standard_4_per_hour_usd: 0.221
+    firestore:
+      document_write_per_100k_usd: 0.18
+      document_read_per_100k_usd: 0.06
+
+# ============================================================================
+# LLM API PRICING (Per 1 Million Tokens)
+# ============================================================================
+
+llm_providers:
+  openai:
+    last_verified: "2025-01-22"
+    pricing_url: "https://openai.com/api/pricing/"
+    models:
+      - name: "gpt-4o"
+        input_per_1m_tokens_usd: 2.50
+        output_per_1m_tokens_usd: 10.00
+        cache_read_per_1m_tokens_usd: 1.25  # 50% discount
+        context_window: 128000
+        recommended_use: "Production workloads"
+
+      - name: "gpt-4o-mini"
+        input_per_1m_tokens_usd: 0.15
+        output_per_1m_tokens_usd: 0.60
+        cache_read_per_1m_tokens_usd: 0.075
+        context_window: 128000
+        recommended_use: "Cost-sensitive applications"
+
+      - name: "gpt-4-turbo"
+        input_per_1m_tokens_usd: 10.00
+        output_per_1m_tokens_usd: 30.00
+        cache_read_per_1m_tokens_usd: 5.00
+        context_window: 128000
+        recommended_use: "Legacy, use gpt-4o instead"
+
+      - name: "gpt-3.5-turbo"
+        input_per_1m_tokens_usd: 0.50
+        output_per_1m_tokens_usd: 1.50
+        cache_read_per_1m_tokens_usd: 0.25
+        context_window: 16000
+        recommended_use: "Simple tasks, fast responses"
+
+  azure_openai:
+    last_verified: "2025-01-22"
+    pricing_url: "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+    note: "Prices may vary slightly from OpenAI API"
+    models:
+      - name: "gpt-4o"
+        input_per_1m_tokens_usd: 2.50
+        output_per_1m_tokens_usd: 10.00
+        cache_read_per_1m_tokens_usd: 1.25
+        context_window: 128000
+        deployment_regions: ["australiaeast", "eastus", "westeurope"]
+
+      - name: "gpt-4-turbo"
+        input_per_1m_tokens_usd: 10.00
+        output_per_1m_tokens_usd: 30.00
+        cache_read_per_1m_tokens_usd: 5.00
+        context_window: 128000
+
+      - name: "gpt-35-turbo"  # Different naming on Azure
+        input_per_1m_tokens_usd: 0.50
+        output_per_1m_tokens_usd: 1.50
+        cache_read_per_1m_tokens_usd: 0.25
+        context_window: 16000
+
+  anthropic:
+    last_verified: "2025-01-22"
+    pricing_url: "https://www.anthropic.com/pricing"
+    note: "NOT available on Azure - use Anthropic API directly"
+    models:
+      - name: "claude-3.5-sonnet"
+        input_per_1m_tokens_usd: 3.00
+        output_per_1m_tokens_usd: 15.00
+        cache_read_per_1m_tokens_usd: 0.30  # 90% discount
+        cache_write_per_1m_tokens_usd: 3.75  # 25% markup
+        context_window: 200000
+        recommended_use: "Best for complex reasoning"
+
+      - name: "claude-3.5-opus"
+        input_per_1m_tokens_usd: 15.00
+        output_per_1m_tokens_usd: 75.00
+        cache_read_per_1m_tokens_usd: 1.50
+        cache_write_per_1m_tokens_usd: 18.75
+        context_window: 200000
+        recommended_use: "Most capable, highest cost"
+
+      - name: "claude-3-haiku"
+        input_per_1m_tokens_usd: 0.25
+        output_per_1m_tokens_usd: 1.25
+        cache_read_per_1m_tokens_usd: 0.03
+        context_window: 200000
+        recommended_use: "Fast, cost-effective"
+
+  google:
+    last_verified: "2025-01-22"
+    pricing_url: "https://ai.google.dev/pricing"
+    models:
+      - name: "gemini-1.5-pro"
+        input_per_1m_tokens_usd: 1.25
+        output_per_1m_tokens_usd: 5.00
+        cache_read_per_1m_tokens_usd: 0.625
+        context_window: 2000000  # 2M tokens!
+        recommended_use: "Large context windows"
+
+      - name: "gemini-1.5-flash"
+        input_per_1m_tokens_usd: 0.075
+        output_per_1m_tokens_usd: 0.30
+        cache_read_per_1m_tokens_usd: 0.0375
+        context_window: 1000000
+        recommended_use: "Fast, cost-effective"
+
+  self_hosted:
+    note: "No API costs, but requires GPU infrastructure"
+    models:
+      - name: "llama-3.1-70b"
+        input_per_1m_tokens_usd: 0.00
+        output_per_1m_tokens_usd: 0.00
+        context_window: 128000
+        infrastructure_required:
+          min_gpus: 2
+          recommended_gpus: 4
+          gpu_memory_gb: 80  # A100 80GB
+          estimated_monthly_cost_usd: 10000  # 2x A100 on cloud
+        recommended_use: "Only if you have existing GPU infrastructure"
+
+# ============================================================================
+# MEMORY SYSTEMS PRICING
+# ============================================================================
+
+memory_systems:
+  redis:
+    provider: "Azure Redis Cache"
+    use_case: "Fast in-memory caching, session state"
+    cost_driver: "Cache size (GB)"
+    tiers:
+      - name: "C0 (250 MB)"
+        capacity_mb: 250
+        cost_per_hour_aud: 0.024
+        suitable_for: "Development only"
+
+      - name: "C1 (1 GB)"
+        capacity_gb: 1
+        cost_per_hour_aud: 0.096
+        suitable_for: "Small agents (1-10 users)"
+
+      - name: "C6 (6 GB)"
+        capacity_gb: 6
+        cost_per_hour_aud: 0.765
+        suitable_for: "Medium agents (50-100 users)"
+
+      - name: "P1 (6 GB Premium)"
+        capacity_gb: 6
+        cost_per_hour_aud: 1.147
+        features: ["Persistence", "Clustering", "Geo-replication"]
+        suitable_for: "Production workloads"
+
+  cosmos_db:
+    provider: "Azure Cosmos DB"
+    use_case: "Multi-model NoSQL, globally distributed"
+    cost_driver: "Request Units (RU/s)"
+    pricing:
+      ru_per_100_per_hour_aud: 0.012
+      storage_per_gb_month_aud: 0.30
+    examples:
+      - ru_per_second: 10000
+        monthly_cost_aud: 876
+        suitable_for: "Small to medium workloads"
+
+      - ru_per_second: 45000
+        monthly_cost_aud: 3942
+        suitable_for: "SCIP default (9 agents, 100 users)"
+
+      - ru_per_second: 100000
+        monthly_cost_aud: 8760
+        suitable_for: "Large-scale production"
+
+  neo4j:
+    provider: "Self-hosted on Azure VMs"
+    use_case: "Graph database for relationships"
+    cost_driver: "Number of VM nodes"
+    pricing:
+      vm_sku: "Standard_D16s_v5"
+      cost_per_node_per_hour_aud: 0.691  # Reserved 1yr
+      storage_per_tb_month_aud: 123  # Premium SSD
+    examples:
+      - nodes: 1
+        monthly_cost_aud: 504
+        suitable_for: "Small graph (<1M nodes)"
+
+      - nodes: 2
+        monthly_cost_aud: 1009
+        suitable_for: "SCIP default (relationship mapping)"
+
+      - nodes: 3
+        monthly_cost_aud: 1513
+        suitable_for: "Large enterprise graph"
+
+  in_memory:
+    provider: "Application memory (no persistence)"
+    use_case: "Temporary state, development"
+    cost: 0
+    warnings:
+      - "Data lost on restart"
+      - "Not suitable for production"
+      - "Use for stateless agents only"
+
+# ============================================================================
+# MCP TOOLS & FUNCTIONS PRICING
+# ============================================================================
+#
+# This section defines pricing for Model Context Protocol (MCP) tools used by
+# AI agents. There are two types of tools with different cost structures:
+#
+# 1. MCP SERVERS - Always-on infrastructure with FIXED monthly costs
+#    - Run continuously (24/7) to provide instant capabilities
+#    - Cost Formula: VM hourly cost × 730 hours/month
+#    - Does NOT scale with usage volume
+#
+# 2. AZURE FUNCTIONS - Serverless compute with VARIABLE usage-based costs
+#    - Only charged when executed
+#    - Cost Formula: (num_assessments × calls_per_assessment ÷ 1000) × cost_per_1k
+#    - Scales linearly with usage
+#
+# Total MCP Cost = Sum(all server costs) + Sum(all function costs)
+#
+# ============================================================================
+
+mcp_tools:
+  # ==========================================================================
+  # MCP SERVERS (Always-On Infrastructure)
+  # ==========================================================================
+  # These tools run continuously and incur fixed monthly costs regardless of
+  # usage volume. They provide instant response times for critical capabilities.
+  #
+  # Cost Calculation: hourly_rate × 730 hours/month
+  # Example: $0.173/hour × 730 = $126.29/month
+  # ==========================================================================
+
+  servers:
+    - name: "research_tool"
+      type: "mcp_server"
+      description: "Web research and data retrieval"
+      infrastructure:
+        vm_sku: "Standard_D4s_v5"  # 4 vCPU, 16 GB RAM
+        cost_per_hour_aud: 0.173    # Azure Reserved 1-year pricing
+        monthly_cost_aud: 126.29    # 0.173 × 730 hours
+
+      # Cost explanation for transparency
+      cost_explanation: |
+        Fixed monthly cost for 24/7 web research capabilities.
+
+        Calculation: $0.173/hour × 730 hours = $126.29/month
+
+        VM: Standard_D4s_v5 (4 vCPU, 16GB RAM) in Australia East
+        Pricing: Azure Reserved Instance (1-year) - 50% savings vs PAYG
+
+      when_to_use: "Required for agents that need real-time web research, competitor analysis, news monitoring, or market intelligence gathering."
+
+      cost_drivers:
+        - "VM size: Standard_D4s_v5 (fixed infrastructure)"
+        - "Reserved vs PAYG: 1-year reservation saves 50%"
+        - "Region: Australia East (Sydney)"
+        - "Usage volume: Does NOT affect cost (always-on)"
+
+      optimization_tips:
+        - "Already optimized with Reserved Instance pricing"
+        - "Consider 3-year reservation for 60% savings (vs 50%)"
+        - "Share across multiple agents to amortize cost"
+        - "Alternative: Use Azure Functions if usage is sporadic"
+
+    - name: "content_generation_tool"
+      type: "mcp_server"
+      description: "Content creation and templates"
+      infrastructure:
+        vm_sku: "Standard_D4s_v5"
+        cost_per_hour_aud: 0.173
+        monthly_cost_aud: 126.29
+
+      cost_explanation: |
+        Fixed monthly cost for content generation infrastructure.
+
+        Calculation: $0.173/hour × 730 hours = $126.29/month
+
+        Provides instant templating, document generation, email drafting,
+        presentation creation, and content formatting capabilities.
+
+      when_to_use: "Essential for sales/marketing agents that generate reports, proposals, emails, presentations, or any formatted content."
+
+      cost_drivers:
+        - "VM size: Standard_D4s_v5"
+        - "Template complexity: More complex templates may need more memory"
+        - "Concurrent users: Single VM handles up to 100 concurrent users"
+
+      optimization_tips:
+        - "Batch content generation during off-peak hours"
+        - "Use template caching to reduce generation overhead"
+        - "Consider downgrading to D2s if usage is light"
+
+    - name: "competitive_intel_tool"
+      type: "mcp_server"
+      description: "Competitor analysis and market data"
+      infrastructure:
+        vm_sku: "Standard_D8s_v5"  # Larger VM for data processing
+        cost_per_hour_aud: 0.346   # 2× cost for 2× capacity
+        monthly_cost_aud: 252.58   # 0.346 × 730 hours
+
+      cost_explanation: |
+        Fixed monthly cost for competitive intelligence capabilities.
+
+        Calculation: $0.346/hour × 730 hours = $252.58/month
+
+        Uses larger VM (8 vCPU, 32GB RAM) for heavy data processing:
+        - Web scraping of competitor sites
+        - Market data aggregation
+        - News and social media monitoring
+        - Pricing intelligence
+        - Product comparison analysis
+
+      when_to_use: "For sales/marketing teams requiring continuous competitor monitoring, pricing intelligence, market trends, or product comparison data."
+
+      cost_drivers:
+        - "VM size: Standard_D8s_v5 (8 vCPU, 32GB) - 2× larger than basic tools"
+        - "Data processing volume: Scrapes dozens of sites hourly"
+        - "External API costs: News, social media APIs (included in VM cost)"
+        - "Storage: Competitor data history (minimal, <10GB)"
+
+      optimization_tips:
+        - "Reduce scraping frequency during weekends/holidays"
+        - "Use incremental updates instead of full scrapes"
+        - "Cache competitor data with 24-hour TTL"
+        - "Consider serverless alternative if competitive intel is needed <10 hours/day"
+
+  # ==========================================================================
+  # AZURE FUNCTIONS (Pay-Per-Execution)
+  # ==========================================================================
+  # These tools are serverless and only charge when executed. Perfect for
+  # tools that are called sporadically or scale with assessment volume.
+  #
+  # Base Azure Functions Pricing:
+  #   - Execution: $0.30 AUD per 1 million executions
+  #   - Memory: $0.000024 AUD per GB-second
+  #
+  # Cost Calculation Formula:
+  #   Total Executions = num_assessments × avg_calls_per_assessment
+  #   Execution Cost = (Total Executions ÷ 1,000,000) × $0.30
+  #   Memory Cost = (duration_seconds × memory_gb × executions) × $0.000024
+  #   Total Cost = Execution Cost + Memory Cost
+  #
+  # For simplicity, we provide pre-calculated "cost_per_1k_calls" that includes
+  # both execution and memory costs for each function.
+  #
+  # Example Calculation for fog_analysis_tool:
+  #   Assessments: 4,000/month
+  #   Calls per assessment: 5
+  #   Total executions: 4,000 × 5 = 20,000
+  #   Cost: (20,000 ÷ 1,000) × $0.15 = $3.00/month
+  # ==========================================================================
+
+  functions:
+    - name: "fog_analysis_tool"
+      type: "function"
+      description: "Fact/Opinion/Gossip classification"
+      avg_duration_seconds: 0.5
+      memory_mb: 512
+      avg_calls_per_assessment: 5
+      cost_per_1k_calls_aud: 0.15
+
+      cost_explanation: |
+        Pay-per-execution pricing. Scales with assessment volume.
+
+        Example: 4,000 assessments/month
+          Executions: 4,000 × 5 calls = 20,000 total
+          Cost: (20,000 ÷ 1,000) × $0.15 = $3.00/month
+
+        Breakdown of $0.15 per 1k calls:
+          - Execution cost: $0.30 per 1M = $0.0003 per 1k
+          - Memory cost: 0.5s × 0.5GB × 1k × $0.000024 = $0.006 per 1k
+          - Total: ~$0.0063 (rounded to $0.15 for safety margin)
+
+        Called 5 times per assessment to classify different statements.
+
+      when_to_use: "Essential for Sales Coach agents using the 4Cs framework. Classifies customer statements into Fact (verifiable), Opinion (subjective), or Gossip (unsubstantiated)."
+
+      cost_drivers:
+        - "Number of assessments per month (primary driver)"
+        - "Calls per assessment: 5× (analyzes multiple customer statements)"
+        - "Processing duration: 0.5 seconds per call"
+        - "Memory allocation: 512 MB"
+
+      optimization_tips:
+        - "Batch multiple statements in single call (reduce 5 calls to 1)"
+        - "Cache common FOG patterns to skip analysis"
+        - "Use client-side pre-filtering for obvious facts"
+
+      scaling_example: |
+        1,000 assessments: 1,000 × 5 ÷ 1,000 × $0.15 = $0.75/month
+        4,000 assessments: 4,000 × 5 ÷ 1,000 × $0.15 = $3.00/month
+        10,000 assessments: 10,000 × 5 ÷ 1,000 × $0.15 = $7.50/month
+
+    - name: "engagement_excellence_tool"
+      type: "function"
+      description: "Six lenses framework analysis"
+      avg_duration_seconds: 0.8
+      memory_mb: 512
+      avg_calls_per_assessment: 3
+      cost_per_1k_calls_aud: 0.20
+
+      cost_explanation: |
+        Example: 4,000 assessments/month
+          Executions: 4,000 × 3 calls = 12,000 total
+          Cost: (12,000 ÷ 1,000) × $0.20 = $2.40/month
+
+        More expensive than FOG tool due to:
+          - Longer processing time (0.8s vs 0.5s)
+          - More complex analysis (six dimensions)
+
+        Analyzes engagement across: Trust, Value, Impact, Risk, Change, Fit
+
+      when_to_use: "Evaluates customer engagement quality across six strategic dimensions. Essential for relationship assessment and opportunity qualification."
+
+      cost_drivers:
+        - "Assessment volume"
+        - "Calls per assessment: 3× (analyzes different engagement aspects)"
+        - "Longer duration: 0.8s (60% longer than FOG tool)"
+        - "Complex multi-dimensional analysis"
+
+      optimization_tips:
+        - "Combine with other analyses to reduce total calls"
+        - "Cache engagement scores with 7-day TTL"
+        - "Skip analysis for low-priority opportunities"
+
+      scaling_example: |
+        1,000 assessments: 1,000 × 3 ÷ 1,000 × $0.20 = $0.60/month
+        4,000 assessments: 4,000 × 3 ÷ 1,000 × $0.20 = $2.40/month
+        10,000 assessments: 10,000 × 3 ÷ 1,000 × $0.20 = $6.00/month
+
+    - name: "impact_theme_generator_tool"
+      type: "function"
+      description: "Generate impact themes"
+      avg_duration_seconds: 1.0
+      memory_mb: 1024
+      avg_calls_per_assessment: 2
+      cost_per_1k_calls_aud: 0.25
+
+      cost_explanation: |
+        Example: 4,000 assessments/month
+          Executions: 4,000 × 2 calls = 8,000 total
+          Cost: (8,000 ÷ 1,000) × $0.25 = $2.00/month
+
+        HIGHEST cost per call due to:
+          - Longest duration: 1.0 second (2× FOG tool)
+          - Double memory: 1,024 MB vs 512 MB
+          - LLM-based theme generation (uses additional tokens)
+
+        Generates personalized value proposition themes for customers.
+
+      when_to_use: "Creates compelling impact themes for value propositions, presentations, and customer messaging. Critical for personalized sales approaches."
+
+      cost_drivers:
+        - "Duration: 1.0 second (longest of all functions)"
+        - "Memory: 1,024 MB (double standard)"
+        - "LLM token usage: Generates creative themes (~500 tokens output)"
+        - "Calls per assessment: 2× (primary + alternative themes)"
+
+      optimization_tips:
+        - "Generate themes only for qualified opportunities"
+        - "Reuse themes for similar customer profiles"
+        - "Cache themes by industry vertical"
+        - "Reduce output tokens with concise prompts"
+
+      scaling_example: |
+        1,000 assessments: 1,000 × 2 ÷ 1,000 × $0.25 = $0.50/month
+        4,000 assessments: 4,000 × 2 ÷ 1,000 × $0.25 = $2.00/month
+        10,000 assessments: 10,000 × 2 ÷ 1,000 × $0.25 = $5.00/month
+
+    - name: "license_to_sell_tool"
+      type: "function"
+      description: "Calculate license to sell gate"
+      avg_duration_seconds: 0.3
+      memory_mb: 256
+      avg_calls_per_assessment: 1
+      cost_per_1k_calls_aud: 0.10
+
+      cost_explanation: |
+        Example: 4,000 assessments/month
+          Executions: 4,000 × 1 call = 4,000 total
+          Cost: (4,000 ÷ 1,000) × $0.10 = $0.40/month
+
+        CHEAPEST function due to:
+          - Single call per assessment (1×)
+          - Fast execution: 0.3 seconds
+          - Low memory: 256 MB (half standard)
+          - Simple calculation logic
+
+        Quick validation of sales readiness based on trust metrics.
+
+      when_to_use: "Validates that salesperson has earned 'license to sell' based on trust score, credibility, and relationship strength. Gate-check before progressing opportunities."
+
+      cost_drivers:
+        - "Single call per assessment (lowest frequency)"
+        - "Shortest duration: 0.3 seconds"
+        - "Minimal memory: 256 MB"
+        - "Simple scoring algorithm (no LLM)"
+
+      optimization_tips:
+        - "Already optimized (cheapest function)"
+        - "Consider client-side calculation if logic is simple enough"
+        - "Cache results per salesperson/customer pair"
+
+      scaling_example: |
+        1,000 assessments: 1,000 × 1 ÷ 1,000 × $0.10 = $0.10/month
+        4,000 assessments: 4,000 × 1 ÷ 1,000 × $0.10 = $0.40/month
+        10,000 assessments: 10,000 × 1 ÷ 1,000 × $0.10 = $1.00/month
+
+    - name: "find_money_validator_tool"
+      type: "function"
+      description: "Budget validation"
+      avg_duration_seconds: 0.5
+      memory_mb: 512
+      avg_calls_per_assessment: 2
+      cost_per_1k_calls_aud: 0.15
+
+      cost_explanation: |
+        Example: 4,000 assessments/month
+          Executions: 4,000 × 2 calls = 8,000 total
+          Cost: (8,000 ÷ 1,000) × $0.15 = $1.20/month
+
+        Validates customer budget and financial authority.
+        Called twice: initial validation + final confirmation.
+
+      when_to_use: "Validates that customer has budget, financial authority, and funding timeline. Critical for deal qualification and forecasting accuracy."
+
+      cost_drivers:
+        - "Calls per assessment: 2× (initial + confirmation)"
+        - "Duration: 0.5 seconds"
+        - "Budget data retrieval from CRM/finance systems"
+        - "External API calls: Credit checks, financial data"
+
+      optimization_tips:
+        - "Skip confirmation call for deals < $10k"
+        - "Cache budget validation for 30 days"
+        - "Batch validate multiple deals from same customer"
+
+      scaling_example: |
+        1,000 assessments: 1,000 × 2 ÷ 1,000 × $0.15 = $0.30/month
+        4,000 assessments: 4,000 × 2 ÷ 1,000 × $0.15 = $1.20/month
+        10,000 assessments: 10,000 × 2 ÷ 1,000 × $0.15 = $3.00/month
+
+# ============================================================================
+# MCP TOOLS TOTAL COST EXAMPLE
+# ============================================================================
+# For Sales Coach with 4,000 assessments/month and all tools enabled:
+#
+# MCP Servers (Fixed):
+#   • research_tool:               $126.29
+#   • content_generation_tool:     $126.29
+#   • competitive_intel_tool:      $252.58
+#   Subtotal (Fixed):              $505.16/month
+#
+# Azure Functions (Variable):
+#   • fog_analysis_tool:           $3.00  (20,000 executions)
+#   • engagement_excellence_tool:  $2.40  (12,000 executions)
+#   • impact_theme_generator_tool: $2.00  (8,000 executions)
+#   • license_to_sell_tool:        $0.40  (4,000 executions)
+#   • find_money_validator_tool:   $1.20  (8,000 executions)
+#   Subtotal (Variable):           $9.00/month
+#
+# TOTAL MCP TOOLS COST:            $514.16/month
+#
+# Scaling Analysis:
+#   - Fixed costs ($505.16) remain constant regardless of usage
+#   - Variable costs ($9.00) scale linearly with assessments
+#   - At 8,000 assessments: Fixed $505.16 + Variable $18.00 = $523.16
+#   - At 2,000 assessments: Fixed $505.16 + Variable $4.50 = $509.66
+#
+# Break-even Analysis:
+#   - If usage < 1,000 assessments/month: Consider disabling MCP servers
+#   - If usage > 10,000 assessments/month: MCP servers highly cost-effective
+#   - Functions scale efficiently: 10× usage = only 10× function cost
+# ============================================================================
+
+# ============================================================================
+# DATA SOURCES PRICING (Enterprise Tier)
+# ============================================================================
+# Note: These are ESTIMATES for 100-seat enterprise contracts
+# Actual pricing varies by:
+# - Number of seats/users
+# - Contract length (annual vs monthly)
+# - Volume discounts
+# - Custom enterprise agreements
+# - Add-on features
+#
+# IMPORTANT: Allow manual override in UI for actual contract prices
+# ============================================================================
+
+data_sources:
+  # Sales Intelligence Platforms
+  - name: "ZoomInfo"
+    category: "Sales Intelligence"
+    pricing_model: "Per seat, annual contract"
+    estimated_cost_usd_month: 15000  # 100 seats
+    cost_per_seat_usd_month: 150
+    notes: "Enterprise tier with API access"
+    verification_url: "https://www.zoominfo.com/pricing"
+    allow_manual_override: true
+
+  - name: "LinkedIn Sales Navigator"
+    category: "Social Selling"
+    pricing_model: "Per seat, monthly"
+    estimated_cost_usd_month: 9900  # 100 seats × $99/month
+    cost_per_seat_usd_month: 99
+    notes: "Team edition"
+    verification_url: "https://business.linkedin.com/sales-solutions/sales-navigator/pricing"
+    allow_manual_override: true
+
+  - name: "Clearbit"
+    category: "Data Enrichment"
+    pricing_model: "API calls + seat license"
+    estimated_cost_usd_month: 12000
+    notes: "Enterprise tier with enrichment API"
+    verification_url: "https://clearbit.com/pricing"
+    allow_manual_override: true
+
+  # CRM Systems (data sync only)
+  - name: "Salesforce"
+    category: "CRM"
+    pricing_model: "Data sync via REST API"
+    estimated_cost_usd_month: 0
+    notes: "No additional cost - using existing licenses, API access only"
+    allow_manual_override: true
+
+  - name: "HubSpot"
+    category: "CRM"
+    pricing_model: "Data sync via API"
+    estimated_cost_usd_month: 0
+    notes: "No additional cost - data sync only, no UI licensing"
+    allow_manual_override: true
+
+  # News & Content APIs
+  - name: "News APIs"
+    category: "Content"
+    pricing_model: "API subscription"
+    estimated_cost_usd_month: 200
+    notes: "NewsAPI + aggregators for market intelligence"
+    allow_manual_override: true
+
+  - name: "Social Media APIs"
+    category: "Social Monitoring"
+    pricing_model: "API subscription"
+    estimated_cost_usd_month: 150
+    notes: "Twitter/X, LinkedIn APIs for sentiment"
+    allow_manual_override: true
+
+  - name: "Company Data APIs"
+    category: "Business Intelligence"
+    pricing_model: "API calls"
+    estimated_cost_usd_month: 300
+    notes: "Crunchbase, PitchBook, etc."
+    allow_manual_override: true
+
+# ============================================================================
+# MONITORING & OBSERVABILITY PRICING
+# ============================================================================
+# Allow manual override for actual usage patterns
+# ============================================================================
+
+monitoring:
+  azure_monitor:
+    - name: "Log Analytics"
+      pricing_model: "Per GB ingested"
+      cost_per_gb_aud: 3.50
+      estimated_monthly_gb: 100
+      estimated_monthly_cost_aud: 350
+      notes: "Application logs, metrics, traces"
+      allow_manual_override: true
+
+    - name: "Application Insights"
+      pricing_model: "Per GB telemetry"
+      cost_per_gb_aud: 3.25
+      estimated_monthly_gb: 50
+      estimated_monthly_cost_aud: 162.50
+      notes: "APM, user analytics, performance monitoring"
+      allow_manual_override: true
+
+  third_party:
+    - name: "Datadog"
+      pricing_model: "Per host + logs"
+      estimated_cost_usd_month: 500
+      notes: "10 hosts @ $31/host + log ingestion"
+      verification_url: "https://www.datadog.com/pricing/"
+      allow_manual_override: true
+
+    - name: "Grafana Cloud"
+      pricing_model: "Metrics + logs + traces"
+      estimated_cost_usd_month: 200
+      notes: "Pro tier for dashboards and alerting"
+      allow_manual_override: true
+
+    - name: "Prometheus (Self-hosted)"
+      pricing_model: "Infrastructure only"
+      estimated_cost_aud_month: 250
+      notes: "VM + storage costs for self-hosted metrics"
+      allow_manual_override: true
+
+# ============================================================================
+# PRICING RULES & FORMULAS
+# ============================================================================
+
+formulas:
+  # How to calculate total memory cost based on selection
+  memory_cost_calculation: |
+    if memory_type == 'redis':
+      # Scale based on required capacity
+      capacity_gb = max(1, estimated_data_gb)
+      if capacity_gb <= 1:
+        hourly_cost = redis.c1.cost_per_hour
+      elif capacity_gb <= 6:
+        hourly_cost = redis.c6.cost_per_hour
+      else:
+        hourly_cost = redis.p1.cost_per_hour * ceil(capacity_gb / 6)
+      monthly_cost = hourly_cost * 730
+
+    elif memory_type == 'cosmos_db':
+      # Scale based on RU/s requirements
+      ru_per_second = calculate_ru_from_queries(queries_per_second)
+      monthly_cost = (ru_per_second / 100) * cosmos_db.ru_per_100_per_hour * 730
+
+    elif memory_type == 'neo4j':
+      # Scale based on graph size
+      nodes_required = ceil(estimated_nodes / 1000000)  # 1M nodes per VM
+      monthly_cost = nodes_required * neo4j.cost_per_node_per_hour * 730
+
+    elif memory_type == 'in_memory':
+      monthly_cost = 0  # Free but not persistent
+
+  # How to calculate MCP tools cost
+  tools_cost_calculation: |
+    total_cost = 0
+
+    for tool in selected_tools:
+      if tool.type == 'mcp_server':
+        # Always-on server cost
+        total_cost += tool.monthly_cost
+
+      elif tool.type == 'function':
+        # Pay per execution
+        total_executions = num_assessments * tool.avg_calls_per_assessment
+        total_cost += (total_executions / 1000) * tool.cost_per_1k_calls
+
+    return total_cost
+
+  # Exchange rate application
+  usd_to_aud_conversion: |
+    aud_amount = usd_amount * exchange_rates.usd_to_aud
