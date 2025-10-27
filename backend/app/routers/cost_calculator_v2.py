@@ -169,6 +169,7 @@ class AgentCostRequest(BaseModel):
     """Request model for calculating individual agent LLM costs"""
     llm_model: str = Field(..., description="The LLM model used by this agent")
     deployment_type: str = Field(default="cloud_api", description="cloud_api or on_premise")
+    service_tier: str = Field(default="standard", description="Service tier for GPU allocation")
     num_users: int = Field(default=100, ge=1, le=10000)
     queries_per_user_per_month: int = Field(default=40, ge=1, le=10000)
     avg_tokens_per_request: int = Field(default=5000, ge=100, le=100000)
@@ -1140,14 +1141,17 @@ async def calculate_agent_cost_endpoint(params: AgentCostRequest):
                     gpu_type = model.get("gpu_type", "A100")
                     break
 
-        # Calculate hours needed per month (rough estimate based on query load)
-        # Assuming 1 query takes ~2 seconds on average
-        hours_per_month = (total_queries * 2) / 3600  # Convert seconds to hours
-        hours_per_month = max(730, hours_per_month)  # Minimum of full month (730 hours)
+        # Determine number of GPUs based on service tier
+        gpu_count = {
+            "basic": 1,      # 1 GPU for basic tier
+            "standard": 2,   # 2 GPUs for standard tier
+            "premium": 4     # 4 GPUs for premium tier
+        }.get(params.service_tier.lower(), 1)
 
-        # Use hourly GPU cost
+        # Calculate full month GPU cost (730 hours) with tier-based allocation
         from app.config.service_tiers import GPU_COSTS
-        monthly_cost_usd = GPU_COSTS[gpu_type]["hourly_cost"] * hours_per_month
+        gpu_hourly_cost = GPU_COSTS[gpu_type]["hourly_cost"]
+        monthly_cost_usd = gpu_hourly_cost * 730 * gpu_count
 
         # Convert USD to AUD
         monthly_cost_aud = monthly_cost_usd / AUD_TO_USD

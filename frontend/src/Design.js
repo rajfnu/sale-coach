@@ -84,7 +84,17 @@ const SCIP_AGENTS = {
       avg_tokens_per_request: 10000,
       requests_per_4cs_calculation: 2
     },
-    llmOptions: ['claude-3.5-sonnet', 'gpt-4o', 'claude-3.5-opus'],
+    llmOptions: [
+      // Cheap models (Basic tier compatible)
+      'gpt-5-nano', 'gemini-1.5-flash-8b', 'gpt-4.1-nano', 'gpt-4o-mini', 'claude-3-haiku',
+      // Mid-range models
+      'claude-3-5-haiku', 'claude-4-5-haiku', 'o3-mini', 'gpt-4.1', 'gpt-4o',
+      // Expensive models
+      'o3-deep-research', 'o1', 'claude-opus-4', 'gpt-5-pro', 'o3-pro',
+      // On-premise models
+      'llama-3-8b', 'llama-3.1-8b', 'mistral-7b', 'phi-3-mini', 'gemma-7b',
+      'llama-3-70b', 'llama-3.1-70b', 'mistral-medium', 'mixtral-8x7b'
+    ],
     toolsOptions: ['research_tool', 'content_generation_tool', 'competitive_intel_tool', 'engagement_excellence_tool'],
     memoryOptions: ['cosmos-db', 'azure-sql']
   },
@@ -105,7 +115,17 @@ const SCIP_AGENTS = {
       avg_tokens_per_request: 7000,
       requests_per_4cs_calculation: 2
     },
-    llmOptions: ['gpt-4o', 'claude-3.5-sonnet', 'gpt-4-turbo'],
+    llmOptions: [
+      // Cheap models (Basic tier compatible)
+      'gpt-5-nano', 'gemini-1.5-flash-8b', 'gpt-4.1-nano', 'gpt-4o-mini', 'claude-3-haiku',
+      // Mid-range models
+      'claude-3-5-haiku', 'claude-4-5-haiku', 'o3-mini', 'gpt-4.1', 'gpt-4o',
+      // Expensive models
+      'o3-deep-research', 'o1', 'claude-opus-4', 'gpt-5-pro', 'o3-pro',
+      // On-premise models
+      'llama-3-8b', 'llama-3.1-8b', 'mistral-7b', 'phi-3-mini', 'gemma-7b',
+      'llama-3-70b', 'llama-3.1-70b', 'mistral-medium', 'mixtral-8x7b'
+    ],
     toolsOptions: ['research_tool', 'competitive_intel_tool', 'fog_analysis_tool'],
     memoryOptions: ['neo4j', 'cosmos-db', 'azure-sql']
   },
@@ -126,7 +146,17 @@ const SCIP_AGENTS = {
       avg_tokens_per_request: 6000,
       requests_per_4cs_calculation: 2
     },
-    llmOptions: ['gpt-4o', 'claude-3.5-sonnet', 'gpt-4-turbo'],
+    llmOptions: [
+      // Cheap models (Basic tier compatible)
+      'gpt-5-nano', 'gemini-1.5-flash-8b', 'gpt-4.1-nano', 'gpt-4o-mini', 'claude-3-haiku',
+      // Mid-range models
+      'claude-3-5-haiku', 'claude-4-5-haiku', 'o3-mini', 'gpt-4.1', 'gpt-4o',
+      // Expensive models
+      'o3-deep-research', 'o1', 'claude-opus-4', 'gpt-5-pro', 'o3-pro',
+      // On-premise models
+      'llama-3-8b', 'llama-3.1-8b', 'mistral-7b', 'phi-3-mini', 'gemma-7b',
+      'llama-3-70b', 'llama-3.1-70b', 'mistral-medium', 'mixtral-8x7b'
+    ],
     toolsOptions: ['research_tool', 'competitive_intel_tool', 'find_money_validator_tool'],
     memoryOptions: ['cosmos-db', 'azure-sql']
   },
@@ -147,7 +177,17 @@ const SCIP_AGENTS = {
       avg_tokens_per_request: 5000,
       requests_per_4cs_calculation: 1
     },
-    llmOptions: ['gpt-4o', 'claude-3.5-sonnet', 'gpt-4-turbo'],
+    llmOptions: [
+      // Cheap models (Basic tier compatible)
+      'gpt-5-nano', 'gemini-1.5-flash-8b', 'gpt-4.1-nano', 'gpt-4o-mini', 'claude-3-haiku',
+      // Mid-range models
+      'claude-3-5-haiku', 'claude-4-5-haiku', 'o3-mini', 'gpt-4.1', 'gpt-4o',
+      // Expensive models
+      'o3-deep-research', 'o1', 'claude-opus-4', 'gpt-5-pro', 'o3-pro',
+      // On-premise models
+      'llama-3-8b', 'llama-3.1-8b', 'mistral-7b', 'phi-3-mini', 'gemma-7b',
+      'llama-3-70b', 'llama-3.1-70b', 'mistral-medium', 'mixtral-8x7b'
+    ],
     toolsOptions: ['research_tool', 'license_to_sell_tool'],
     memoryOptions: ['cosmos-db', 'azure-sql']
   },
@@ -168,7 +208,17 @@ const SCIP_AGENTS = {
       avg_tokens_per_request: 5000,
       requests_per_4cs_calculation: 2 // Called after 4Cs to generate actions
     },
-    llmOptions: ['gpt-4o', 'claude-3.5-opus', 'claude-3.5-sonnet', 'gpt-4-turbo'],
+    llmOptions: [
+      // Cheap models (Basic tier compatible)
+      'gpt-5-nano', 'gemini-1.5-flash-8b', 'gpt-4.1-nano', 'gpt-4o-mini', 'claude-3-haiku',
+      // Mid-range models
+      'claude-3-5-haiku', 'claude-4-5-haiku', 'o3-mini', 'gpt-4.1', 'gpt-4o',
+      // Expensive models
+      'o3-deep-research', 'o1', 'claude-opus-4', 'gpt-5-pro', 'o3-pro',
+      // On-premise models
+      'llama-3-8b', 'llama-3.1-8b', 'mistral-7b', 'phi-3-mini', 'gemma-7b',
+      'llama-3-70b', 'llama-3.1-70b', 'mistral-medium', 'mixtral-8x7b'
+    ],
     toolsOptions: ['research_tool', 'engagement_excellence_tool', 'impact_theme_generator_tool', 'fog_analysis_tool', 'content_generation_tool', 'competitive_intel_tool'],
     memoryOptions: ['cosmos-db', 'redis', 'azure-sql']
   },
@@ -189,7 +239,17 @@ const SCIP_AGENTS = {
       avg_tokens_per_request: 4000,
       requests_per_4cs_calculation: 1 // Called when feedback is provided
     },
-    llmOptions: ['gpt-4o', 'claude-3.5-sonnet', 'gpt-4-turbo'],
+    llmOptions: [
+      // Cheap models (Basic tier compatible)
+      'gpt-5-nano', 'gemini-1.5-flash-8b', 'gpt-4.1-nano', 'gpt-4o-mini', 'claude-3-haiku',
+      // Mid-range models
+      'claude-3-5-haiku', 'claude-4-5-haiku', 'o3-mini', 'gpt-4.1', 'gpt-4o',
+      // Expensive models
+      'o3-deep-research', 'o1', 'claude-opus-4', 'gpt-5-pro', 'o3-pro',
+      // On-premise models
+      'llama-3-8b', 'llama-3.1-8b', 'mistral-7b', 'phi-3-mini', 'gemma-7b',
+      'llama-3-70b', 'llama-3.1-70b', 'mistral-medium', 'mixtral-8x7b'
+    ],
     toolsOptions: ['fog_analysis_tool', 'research_tool', 'engagement_excellence_tool'],
     memoryOptions: ['cosmos-db', 'azure-sql', 'redis']
   },
@@ -210,7 +270,17 @@ const SCIP_AGENTS = {
       avg_tokens_per_request: 4000,
       requests_per_4cs_calculation: 0
     },
-    llmOptions: ['gpt-4o', 'gpt-4-turbo'],
+    llmOptions: [
+      // Cheap models (Basic tier compatible)
+      'gpt-5-nano', 'gemini-1.5-flash-8b', 'gpt-4.1-nano', 'gpt-4o-mini', 'claude-3-haiku',
+      // Mid-range models
+      'claude-3-5-haiku', 'claude-4-5-haiku', 'o3-mini', 'gpt-4.1', 'gpt-4o',
+      // Expensive models
+      'o3-deep-research', 'o1', 'claude-opus-4', 'gpt-5-pro', 'o3-pro',
+      // On-premise models
+      'llama-3-8b', 'llama-3.1-8b', 'mistral-7b', 'phi-3-mini', 'gemma-7b',
+      'llama-3-70b', 'llama-3.1-70b', 'mistral-medium', 'mixtral-8x7b'
+    ],
     toolsOptions: ['speech_to_text', 'fog_analysis_tool'],
     memoryOptions: ['redis', 'in-memory']
   }
@@ -259,12 +329,13 @@ const Design = () => {
   // Individual agent cost calculation
   const [agentCosts, setAgentCosts] = useState({});
 
-  // Calculate individual agent cost (LLM only)
+  // Calculate individual agent cost (LLM only for Cloud API, Infrastructure for On-Premise)
   const calculateAgentCost = async (agentId, config) => {
     try {
       const response = await axios.post('/api/cost/calculate-agent', {
         llm_model: config.llm,
         deployment_type: config.deployment_type || 'cloud_api',
+        service_tier: globalParams.service_tier, // Add service tier for GPU allocation
         num_users: globalParams.num_users,
         queries_per_user_per_month: globalParams.assessments_per_user_per_month,
         avg_tokens_per_request: config.avg_tokens_per_request || 5000,
@@ -272,6 +343,8 @@ const Design = () => {
         use_prompt_caching: true
       });
 
+      // For on-premise, this cost should be treated as infrastructure, not LLM
+      // We'll return it as-is but the UI should categorize it correctly
       return response.data.agent_llm_cost_monthly;
     } catch (error) {
       console.error(`Error calculating cost for ${agentId}:`, error);
@@ -418,12 +491,6 @@ const Design = () => {
           cloud_api: cloudResponse.data?.models || [],
           on_premise: onPremResponse.data?.models || []
         });
-        
-        // Debug logging
-        console.log('Loaded tier models:', {
-          cloud_api: cloudResponse.data?.models || [],
-          on_premise: onPremResponse.data?.models || []
-        });
       } catch (error) {
         console.error('Error fetching tier models:', error);
       }
@@ -513,31 +580,16 @@ const Design = () => {
     const deploymentType = currentConfig.deployment_type || 'cloud_api';
     const availableModels = tierModels[deploymentType] || [];
 
-    console.log('getFilteredLLMOptions debug:', {
-      deploymentType,
-      availableModels,
-      tierModels,
-      currentAgent: currentAgent.id
-    });
-
     if (availableModels.length === 0) {
       // Fallback to agent's default options if tier models not loaded
-      console.log('No tier models loaded, using agent defaults');
       return currentAgent.llmOptions;
     }
 
     // Get model IDs from tier configuration
     const availableModelIds = availableModels.map(m => m.id);
-    const filteredOptions = currentAgent.llmOptions.filter(model => availableModelIds.includes(model));
-    
-    console.log('Filtered options:', {
-      availableModelIds,
-      agentOptions: currentAgent.llmOptions,
-      filteredOptions
-    });
 
     // Filter agent's LLM options to only include models available in the selected tier
-    return filteredOptions;
+    return currentAgent.llmOptions.filter(model => availableModelIds.includes(model));
   };
 
   const handleConfigChange = (field, value) => {
