@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Briefcase, Settings, Zap, DollarSign, Database, Cpu, Brain, Users, TrendingUp, Target, Shield, MessageSquare, Info, X, Lightbulb, Award, Sparkles, Crown, Server, BarChart3 } from 'lucide-react';
+import { Briefcase, Settings, Zap, DollarSign, Database, Cpu, Brain, Users, TrendingUp, Target, Shield, MessageSquare, Info, X, Lightbulb, Award, Sparkles, Crown, Server, BarChart3, Cloud } from 'lucide-react';
 import { useAppContext } from './AppContext';
 import axios from 'axios';
 
@@ -248,6 +248,10 @@ const Design = () => {
 
   // Popup state for info modal
   const [showInfoPopup, setShowInfoPopup] = useState(false);
+  
+  // Service Tier Info popup state
+  const [showServiceTierInfo, setShowServiceTierInfo] = useState(false);
+  const [serviceTierInfoTab, setServiceTierInfoTab] = useState('cost');
 
   // Cost details tabs state
   const [costDetailsTab, setCostDetailsTab] = useState('overview');
@@ -566,6 +570,13 @@ const Design = () => {
             <h2 className="text-2xl font-bold text-gray-900 flex items-center">
               <Award className="w-7 h-7 text-indigo-600 mr-3" />
               Service Tier Selection
+              <button
+                onClick={() => setShowServiceTierInfo(true)}
+                className="ml-3 p-1 hover:bg-indigo-100 rounded-full transition-colors"
+                title="Learn about service tiers, costs, and deployment options"
+              >
+                <Info className="w-5 h-5 text-indigo-600" />
+              </button>
             </h2>
             <p className="text-sm text-gray-600 mt-2">
               Choose your service tier to automatically configure LLM models, infrastructure, and features.
@@ -1619,26 +1630,470 @@ const Design = () => {
           );
         })()}
 
-        {/* Info Footer */}
-        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-3">About the Optimized SCIP Architecture</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
-            <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Lean Agents + Rich Tools</h4>
-              <p>
-                Reduced from 21 agents to 9 optimized agents following AI best practices.
-                Complex reasoning stays in agents; data retrieval and templates moved to MCP tools.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Cost Savings & Impact</h4>
-              <p>
-                57% reduction in agents = 57% cost savings with 50-60% faster response times.
-                Every agent configuration (LLM, tokens, usage probability) directly impacts the Cost Calculator.
-              </p>
+        {/* Service Tier Info Popup */}
+        {showServiceTierInfo && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+              {/* Header */}
+              <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-6 rounded-t-2xl">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Award className="w-8 h-8" />
+                    <h3 className="text-2xl font-bold">Service Tier Guide</h3>
+                  </div>
+                  <button
+                    onClick={() => setShowServiceTierInfo(false)}
+                    className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Tabs */}
+              <div className="border-b border-gray-200 bg-gray-50">
+                <div className="flex overflow-x-auto">
+                  {[
+                    { id: 'cost', name: 'Cost Structure', icon: DollarSign },
+                    { id: 'analysis', name: 'Cost Analysis', icon: BarChart3 },
+                    { id: 'recommendations', name: 'Recommendations', icon: Lightbulb }
+                  ].map((tab) => {
+                    const Icon = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setServiceTierInfoTab(tab.id)}
+                        className={`px-6 py-4 font-medium transition-colors whitespace-nowrap flex items-center space-x-2 ${
+                          serviceTierInfoTab === tab.id
+                            ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        <span>{tab.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Tab Content */}
+              <div className="p-6">
+                {/* Cost Tab */}
+                {serviceTierInfoTab === 'cost' && (
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                      <h4 className="text-xl font-bold text-blue-900 mb-4 flex items-center">
+                        <DollarSign className="w-6 h-6 mr-2" />
+                        Cost Structure Comparison
+                      </h4>
+                      
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Cloud API */}
+                        <div className="bg-white rounded-lg p-4 border border-blue-300">
+                          <h5 className="font-bold text-blue-800 mb-3 flex items-center">
+                            <Cloud className="w-5 h-5 mr-2" />
+                            Cloud API (Token-Based)
+                          </h5>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                              <span><strong>Pricing:</strong> Per 1M tokens (input/output)</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                              <span><strong>Example:</strong> GPT-4o = $2.50 input + $10.00 output</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                              <span><strong>Scaling:</strong> Linear with usage</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                              <span><strong>Upfront:</strong> No upfront costs</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* On-Premise */}
+                        <div className="bg-white rounded-lg p-4 border border-purple-300">
+                          <h5 className="font-bold text-purple-800 mb-3 flex items-center">
+                            <Server className="w-5 h-5 mr-2" />
+                            On-Premise (GPU-Based)
+                          </h5>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                              <span><strong>Pricing:</strong> Per GPU hour (24/7 availability)</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                              <span><strong>GPU Allocation:</strong> Basic(1), Standard(2), Premium(4)</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                              <span><strong>Scaling:</strong> Fixed monthly cost</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                              <span><strong>Upfront:</strong> GPU infrastructure required</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Monthly GPU Costs */}
+                      <div className="mt-6 bg-white rounded-lg p-4 border border-gray-300">
+                        <h6 className="font-bold text-gray-800 mb-3">Monthly GPU Costs (AUD)</h6>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                          <div className="text-center">
+                            <div className="font-semibold text-gray-700">T4 GPU</div>
+                            <div className="text-lg font-bold text-blue-600">$252/month</div>
+                            <div className="text-xs text-gray-500">Basic models (8B)</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="font-semibold text-gray-700">A100 GPU</div>
+                            <div className="text-lg font-bold text-purple-600">$1,080/month</div>
+                            <div className="text-xs text-gray-500">Mid-range models (70B)</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="font-semibold text-gray-700">H100 GPU</div>
+                            <div className="text-lg font-bold text-red-600">$2,160/month</div>
+                            <div className="text-xs text-gray-500">Large models (405B)</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                      <h4 className="text-xl font-bold text-green-900 mb-4 flex items-center">
+                        <Settings className="w-6 h-6 mr-2" />
+                        Cost Calculation Method
+                      </h4>
+                      
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Cloud API Calculation */}
+                        <div className="bg-white rounded-lg p-4 border border-green-300">
+                          <h6 className="font-bold text-green-800 mb-3">Cloud API (Token-Based)</h6>
+                          <div className="space-y-2 text-sm">
+                            <div className="bg-gray-50 p-2 rounded font-mono text-xs">
+                              Cost = Tokens Used × Price per 1M tokens
+                            </div>
+                            <div className="text-gray-600">
+                              <strong>Example:</strong> 1M tokens with GPT-4o<br/>
+                              Input: 1M × $2.50 = $2.50<br/>
+                              Output: 1M × $10.00 = $10.00<br/>
+                              <strong>Total: $12.50 AUD</strong>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* On-Premise Calculation */}
+                        <div className="bg-white rounded-lg p-4 border border-green-300">
+                          <h6 className="font-bold text-green-800 mb-3">On-Premise (GPU-Based)</h6>
+                          <div className="space-y-2 text-sm">
+                            <div className="bg-gray-50 p-2 rounded font-mono text-xs">
+                              Cost = GPU Count × GPU Rate × 730 hours × Allocation %
+                            </div>
+                            <div className="text-gray-600">
+                              <strong>Example:</strong> Standard tier (2 GPUs)<br/>
+                              2 × $1.50/hr × 730 hours = $2,190<br/>
+                              <strong>Total: $2,190 AUD/month</strong><br/>
+                              <em>(regardless of usage)</em>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Cost Analysis Tab */}
+                {serviceTierInfoTab === 'analysis' && (
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-6 border border-orange-200">
+                      <h4 className="text-xl font-bold text-orange-900 mb-4 flex items-center">
+                        <BarChart3 className="w-6 h-6 mr-2" />
+                        Break-Even Analysis
+                      </h4>
+                      
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Llama-3-8b Analysis */}
+                        <div className="bg-white rounded-lg p-4 border border-orange-300">
+                          <h6 className="font-bold text-orange-800 mb-3">Llama-3-8b (T4 GPU)</h6>
+                          <div className="space-y-3 text-sm">
+                            <div className="flex justify-between">
+                              <span>On-Premise:</span>
+                              <span className="font-semibold">$252/month</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Cloud API:</span>
+                              <span className="font-semibold">~$0.05/1M tokens</span>
+                            </div>
+                            <div className="bg-orange-50 p-2 rounded">
+                              <div className="font-semibold text-orange-800">Break-Even:</div>
+                              <div className="text-orange-700">~168M tokens/day</div>
+                              <div className="text-xs text-orange-600">Very high usage needed</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Llama-3-70b Analysis */}
+                        <div className="bg-white rounded-lg p-4 border border-orange-300">
+                          <h6 className="font-bold text-orange-800 mb-3">Llama-3-70b (A100 GPU)</h6>
+                          <div className="space-y-3 text-sm">
+                            <div className="flex justify-between">
+                              <span>On-Premise:</span>
+                              <span className="font-semibold">$1,080/month</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Cloud API:</span>
+                              <span className="font-semibold">~$0.80/1M tokens</span>
+                            </div>
+                            <div className="bg-orange-50 p-2 rounded">
+                              <div className="font-semibold text-orange-800">Break-Even:</div>
+                              <div className="text-orange-700">~45M tokens/day</div>
+                              <div className="text-xs text-orange-600">High usage needed</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {/* On-Premise Advantages */}
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+                        <h5 className="text-lg font-bold text-purple-900 mb-4 flex items-center">
+                          <Shield className="w-5 h-5 mr-2" />
+                          On-Premise Advantages
+                        </h5>
+                        <div className="space-y-3 text-sm">
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-purple-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>Data Privacy:</strong> No data leaves your infrastructure
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-purple-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>Predictable Costs:</strong> Fixed monthly costs, no surprise bills
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-purple-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>No Rate Limits:</strong> Unlimited queries
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-purple-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>Custom Fine-tuning:</strong> Train your own models
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Cloud API Advantages */}
+                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                        <h5 className="text-lg font-bold text-blue-900 mb-4 flex items-center">
+                          <Cloud className="w-5 h-5 mr-2" />
+                          Cloud API Advantages
+                        </h5>
+                        <div className="space-y-3 text-sm">
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>Pay-per-use:</strong> Scales with actual usage
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>No Infrastructure:</strong> No hardware management
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>Latest Models:</strong> Access to GPT-4o, Claude, etc.
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                            <div>
+                              <strong>Automatic Scaling:</strong> Handles traffic spikes
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Recommendations Tab */}
+                {serviceTierInfoTab === 'recommendations' && (
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                      <h4 className="text-xl font-bold text-green-900 mb-4 flex items-center">
+                        <Lightbulb className="w-6 h-6 mr-2" />
+                        When to Use Each Option
+                      </h4>
+                      
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Use On-Premise */}
+                        <div className="bg-white rounded-lg p-4 border border-green-300">
+                          <h6 className="font-bold text-green-800 mb-3 flex items-center">
+                            <Server className="w-5 h-5 mr-2" />
+                            Use On-Premise When:
+                          </h6>
+                          <div className="space-y-3 text-sm">
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-green-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>High Volume:</strong> &gt;50M tokens/day consistently
+                              </div>
+                            </div>
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-green-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>Data Privacy:</strong> Sensitive data cannot leave premises
+                              </div>
+                            </div>
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-green-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>Predictable Usage:</strong> Steady, high-volume workloads
+                              </div>
+                            </div>
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-green-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>Custom Models:</strong> Need fine-tuning or proprietary models
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Use Cloud API */}
+                        <div className="bg-white rounded-lg p-4 border border-blue-300">
+                          <h6 className="font-bold text-blue-800 mb-3 flex items-center">
+                            <Cloud className="w-5 h-5 mr-2" />
+                            Use Cloud API When:
+                          </h6>
+                          <div className="space-y-3 text-sm">
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>Variable Usage:</strong> Sporadic or unpredictable workloads
+                              </div>
+                            </div>
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>Latest Models:</strong> Need access to GPT-4o, Claude, etc.
+                              </div>
+                            </div>
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>Low-Medium Volume:</strong> &lt;20M tokens/day
+                              </div>
+                            </div>
+                            <div className="flex items-start">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 mt-2"></span>
+                              <div>
+                                <strong>Cost Optimization:</strong> Want to pay only for what you use
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Available Models */}
+                    <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200">
+                      <h4 className="text-xl font-bold text-purple-900 mb-4 flex items-center">
+                        <Brain className="w-6 h-6 mr-2" />
+                        Available Models by Deployment Type
+                      </h4>
+                      
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* On-Premise Models */}
+                        <div className="bg-white rounded-lg p-4 border border-purple-300">
+                          <h6 className="font-bold text-purple-800 mb-3">✅ On-Premise Models (11 total)</h6>
+                          <div className="space-y-2 text-sm">
+                            <div>
+                              <strong>Cheap Tier:</strong> llama-3-8b, mistral-7b, phi-3-mini, gemma-7b
+                            </div>
+                            <div>
+                              <strong>Mid-Range:</strong> llama-3-70b, mistral-medium, mixtral-8x7b
+                            </div>
+                            <div>
+                              <strong>Expensive:</strong> llama-3-405b, mixtral-8x22b
+                            </div>
+                            <div className="text-xs text-purple-600 mt-2">
+                              All open-source models from Meta, Mistral, Microsoft, Google
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Cloud API Models */}
+                        <div className="bg-white rounded-lg p-4 border border-blue-300">
+                          <h6 className="font-bold text-blue-800 mb-3">✅ Cloud API Models (17+ total)</h6>
+                          <div className="space-y-2 text-sm">
+                            <div>
+                              <strong>OpenAI:</strong> GPT-4o, O1, O3, GPT-5, etc.
+                            </div>
+                            <div>
+                              <strong>Anthropic:</strong> Claude-3.5, Claude-Opus, etc.
+                            </div>
+                            <div>
+                              <strong>Google:</strong> Gemini-2.5, Gemini-Flash, etc.
+                            </div>
+                            <div>
+                              <strong>Others:</strong> Perplexity, Mistral, Cohere
+                            </div>
+                            <div className="text-xs text-blue-600 mt-2">
+                              Latest proprietary models with advanced capabilities
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick Decision Guide */}
+                    <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
+                      <h4 className="text-xl font-bold text-yellow-900 mb-4 flex items-center">
+                        <Target className="w-6 h-6 mr-2" />
+                        Quick Decision Guide
+                      </h4>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div className="bg-white rounded-lg p-4 border border-yellow-300 text-center">
+                          <div className="font-bold text-yellow-800 mb-2">Startup/Small Team</div>
+                          <div className="text-yellow-700">Cloud API</div>
+                          <div className="text-xs text-yellow-600 mt-1">Pay-as-you-go, latest models</div>
+                        </div>
+                        <div className="bg-white rounded-lg p-4 border border-yellow-300 text-center">
+                          <div className="font-bold text-yellow-800 mb-2">Growing Business</div>
+                          <div className="text-yellow-700">Hybrid Approach</div>
+                          <div className="text-xs text-yellow-600 mt-1">Cloud for flexibility, on-premise for core</div>
+                        </div>
+                        <div className="bg-white rounded-lg p-4 border border-yellow-300 text-center">
+                          <div className="font-bold text-yellow-800 mb-2">Enterprise</div>
+                          <div className="text-yellow-700">On-Premise</div>
+                          <div className="text-xs text-yellow-600 mt-1">High volume, data privacy</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
