@@ -900,8 +900,9 @@ const Cost = () => {
                     <div className="font-semibold text-gray-800">{params.num_users}</div>
                   </div>
                   <div>
-                    <span className="text-gray-500">Queries/User:</span>
+                    <span className="text-gray-500">Assessments/User:</span>
                     <div className="font-semibold text-gray-800">{params.queries_per_user_per_month}</div>
+                    <div className="text-xs text-gray-500">Each assessment = ~8 AI queries</div>
                   </div>
                   <div>
                     <span className="text-gray-500">Agent Type:</span>

@@ -935,7 +935,7 @@ const Design = () => {
                         <h5 className="font-semibold text-gray-900">Assessments per User/Month</h5>
                         <p className="text-sm text-gray-600 mt-1">
                           How many 4Cs (Right-to-Win) assessments each user performs monthly.
-                          Typical: {Math.ceil(globalParams.assessments_per_user_per_month / 4)} deals × {Math.round(globalParams.assessments_per_user_per_month / Math.ceil(globalParams.assessments_per_user_per_month / 4))} assessments per deal = {globalParams.assessments_per_user_per_month} assessments.
+                          Each assessment typically involves multiple AI agent queries (see agent configuration below).
                         </p>
                         <p className="text-sm text-indigo-700 mt-2 font-medium">
                           Impact: Scales LLM costs linearly (2x assessments = 2x LLM costs)
@@ -951,23 +951,51 @@ const Design = () => {
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="flex items-start space-x-2">
                       <span className="font-bold text-indigo-600 flex-shrink-0">1.</span>
-                      <p><strong>Total requests</strong> are calculated using the formula above</p>
+                      <p><strong>Total assessments</strong> = Users × Assessments per User per Month</p>
                     </div>
                     <div className="flex items-start space-x-2">
                       <span className="font-bold text-indigo-600 flex-shrink-0">2.</span>
-                      <p>Each <strong>agent</strong> uses these requests based on its <strong>usage probability</strong> and <strong>requests per assessment</strong></p>
+                      <p><strong>Each assessment</strong> triggers multiple AI agent queries based on agent configuration</p>
                     </div>
                     <div className="flex items-start space-x-2">
                       <span className="font-bold text-indigo-600 flex-shrink-0">3.</span>
-                      <p><strong>LLM API costs</strong> scale with token consumption (agent requests × tokens per request)</p>
+                      <p><strong>Agent queries</strong> = Assessments × (Sum of all agents' "Requests per 4Cs Calculation" × Usage Probability)</p>
                     </div>
                     <div className="flex items-start space-x-2">
                       <span className="font-bold text-indigo-600 flex-shrink-0">4.</span>
-                      <p><strong>Infrastructure costs</strong> are mostly fixed (~$17K/month) but storage scales slightly</p>
+                      <p><strong>LLM API costs</strong> scale with token consumption (agent queries × tokens per query)</p>
                     </div>
                     <div className="flex items-start space-x-2">
                       <span className="font-bold text-indigo-600 flex-shrink-0">5.</span>
+                      <p><strong>Infrastructure costs</strong> are mostly fixed (~$17K/month) but storage scales slightly</p>
+                    </div>
+                    <div className="flex items-start space-x-2">
+                      <span className="font-bold text-indigo-600 flex-shrink-0">6.</span>
                       <p><strong>Data source costs</strong> are fixed subscriptions (~$57K/month for ZoomInfo, LinkedIn, etc.)</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Assessment to Query Relationship */}
+                <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                  <h4 className="font-bold text-blue-900 mb-3">📊 Assessment → Query Relationship:</h4>
+                  <div className="space-y-2 text-sm text-blue-800">
+                    <div className="font-semibold">Example: 1 Assessment = Multiple Agent Queries</div>
+                    <div className="ml-4 space-y-1">
+                      <div>• <strong>Supervisor Agent:</strong> 1 query (orchestrates the assessment)</div>
+                      <div>• <strong>Power Plan Agent:</strong> 3 queries (calculates 4Cs scoring)</div>
+                      <div>• <strong>Strategic Planning:</strong> 2 queries (if used, 75% probability)</div>
+                      <div>• <strong>Client Intelligence:</strong> 2 queries (if used, 90% probability)</div>
+                      <div>• <strong>Persona-Coach:</strong> 2 queries (generates next-best-move recommendations)</div>
+                    </div>
+                    <div className="mt-3 p-2 bg-white rounded border border-blue-300">
+                      <div className="font-semibold">Total Queries per Assessment:</div>
+                      <div className="text-xs text-blue-600">
+                        1 + 3 + (2×0.75) + (2×0.90) + 2 = ~8.3 queries per assessment
+                      </div>
+                    </div>
+                    <div className="text-xs text-blue-600 mt-2">
+                      💡 <strong>Query Size:</strong> Each query typically uses 5,000-10,000 tokens (input + output)
                     </div>
                   </div>
                 </div>
