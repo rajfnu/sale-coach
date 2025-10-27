@@ -415,8 +415,14 @@ const Design = () => {
         ]);
 
         setTierModels({
-          cloud_api: cloudResponse.data?.models?.cloud_api || [],
-          on_premise: onPremResponse.data?.models?.on_premise || []
+          cloud_api: cloudResponse.data?.models || [],
+          on_premise: onPremResponse.data?.models || []
+        });
+        
+        // Debug logging
+        console.log('Loaded tier models:', {
+          cloud_api: cloudResponse.data?.models || [],
+          on_premise: onPremResponse.data?.models || []
         });
       } catch (error) {
         console.error('Error fetching tier models:', error);
@@ -507,26 +513,66 @@ const Design = () => {
     const deploymentType = currentConfig.deployment_type || 'cloud_api';
     const availableModels = tierModels[deploymentType] || [];
 
+    console.log('getFilteredLLMOptions debug:', {
+      deploymentType,
+      availableModels,
+      tierModels,
+      currentAgent: currentAgent.id
+    });
+
     if (availableModels.length === 0) {
       // Fallback to agent's default options if tier models not loaded
+      console.log('No tier models loaded, using agent defaults');
       return currentAgent.llmOptions;
     }
 
     // Get model IDs from tier configuration
     const availableModelIds = availableModels.map(m => m.id);
+    const filteredOptions = currentAgent.llmOptions.filter(model => availableModelIds.includes(model));
+    
+    console.log('Filtered options:', {
+      availableModelIds,
+      agentOptions: currentAgent.llmOptions,
+      filteredOptions
+    });
 
     // Filter agent's LLM options to only include models available in the selected tier
-    return currentAgent.llmOptions.filter(model => availableModelIds.includes(model));
+    return filteredOptions;
   };
 
   const handleConfigChange = (field, value) => {
-    setAgentConfigs(prev => ({
-      ...prev,
-      [activeAgent]: {
+    setAgentConfigs(prev => {
+      const updatedConfig = {
         ...prev[activeAgent],
         [field]: value
+      };
+
+      // If deployment type changes, automatically switch to a valid model
+      if (field === 'deployment_type') {
+        const deploymentType = value;
+        const availableModels = tierModels[deploymentType] || [];
+        
+        if (availableModels.length > 0) {
+          const availableModelIds = availableModels.map(m => m.id);
+          const currentModel = prev[activeAgent].llm;
+          
+          // If current model is not available in new deployment type, switch to first available
+          if (!availableModelIds.includes(currentModel)) {
+            const firstAvailableModel = currentAgent.llmOptions.find(model => 
+              availableModelIds.includes(model)
+            );
+            if (firstAvailableModel) {
+              updatedConfig.llm = firstAvailableModel;
+            }
+          }
+        }
       }
-    }));
+
+      return {
+        ...prev,
+        [activeAgent]: updatedConfig
+      };
+    });
     
     // Trigger cost recalculation for this agent when LLM or other key parameters change
     if (['llm', 'deployment_type', 'memory_type', 'avg_tokens_per_request'].includes(field)) {
@@ -1128,23 +1174,39 @@ const Design = () => {
                     </button>
                   </div>
 
-                  <select
-                    value={currentConfig.llm}
-                    onChange={(e) => handleConfigChange('llm', e.target.value)}
-                    className="w-full rounded-md border-purple-300 shadow-sm p-3 bg-white"
-                  >
-                    {getFilteredLLMOptions().map(model => (
-                      <option key={model} value={model}>{model}</option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      value={currentConfig.llm}
+                      onChange={(e) => handleConfigChange('llm', e.target.value)}
+                      className="w-full rounded-md border-purple-300 shadow-sm p-3 bg-white"
+                    >
+                      {getFilteredLLMOptions().map(model => (
+                        <option key={model} value={model}>{model}</option>
+                      ))}
+                    </select>
+                    
+                    {/* Filtering Status Indicator */}
+                    <div className="absolute top-1 right-1">
+                      <div className={`w-2 h-2 rounded-full ${
+                        getFilteredLLMOptions().length < currentAgent.llmOptions.length 
+                          ? 'bg-orange-400' 
+                          : 'bg-green-400'
+                      }`} title={
+                        getFilteredLLMOptions().length < currentAgent.llmOptions.length 
+                          ? `${currentAgent.llmOptions.length - getFilteredLLMOptions().length} models filtered out` 
+                          : 'All models available'
+                      }></div>
+                    </div>
+                  </div>
+                  
                   {getFilteredLLMOptions().length === 0 && (
                     <p className="mt-2 text-xs text-red-600">
-                      No models available for this tier. Please select a different tier.
+                      No models available for this tier and deployment type. Please select a different tier or deployment type.
                     </p>
                   )}
                   {getFilteredLLMOptions().length < currentAgent.llmOptions.length && (
                     <p className="mt-2 text-xs text-purple-600">
-                      {currentAgent.llmOptions.length - getFilteredLLMOptions().length} model(s) unavailable in {globalParams.service_tier} tier
+                      {currentAgent.llmOptions.length - getFilteredLLMOptions().length} model(s) unavailable for {currentConfig.deployment_type || 'cloud_api'} deployment in {globalParams.service_tier} tier
                     </p>
                   )}
                   {/* Estimated Cost Display */}
