@@ -401,7 +401,7 @@ const Design = () => {
         const costs = {};
 
         // Get actual LLM cost from agents
-        const actualLLMCost = getActualLLMCost();
+        const actualLLMCost = getActualLLMCost().total;
 
         // Calculate cost for each tier in parallel
         const promises = tiers.map(async (tier) => {
@@ -549,15 +549,27 @@ const Design = () => {
     return targets[tierKey] || 0;
   };
 
-  // Calculate actual total LLM cost from individual agent costs (weighted by usage probability)
+  // Calculate actual LLM cost from individual agents (separated by deployment type)
   const getActualLLMCost = () => {
-    let totalLLMCost = 0;
-    Object.entries(agentConfigs).forEach(([agentId, config]) => {
-      const agentCost = agentCosts[agentId] || 0;
-      const probability = (config.usage_probability || 0) / 100;
-      totalLLMCost += agentCost * probability;
-    });
-    return totalLLMCost;
+    const cloudApiCost = Object.entries(agentConfigs).reduce((total, [agentId, config]) => {
+      if (config.deployment_type === 'cloud_api') {
+        const agentCost = agentCosts[agentId] || 0;
+        const weightedCost = agentCost * (config.usage_probability / 100);
+        return total + weightedCost;
+      }
+      return total;
+    }, 0);
+
+    const onPremiseCost = Object.entries(agentConfigs).reduce((total, [agentId, config]) => {
+      if (config.deployment_type === 'on_premise') {
+        const agentCost = agentCosts[agentId] || 0;
+        const weightedCost = agentCost * (config.usage_probability / 100);
+        return total + weightedCost;
+      }
+      return total;
+    }, 0);
+
+    return { cloudApiCost, onPremiseCost, total: cloudApiCost + onPremiseCost };
   };
 
   // Format currency helper
@@ -841,7 +853,7 @@ const Design = () => {
           {/* Cost Breakdown for Selected Tier */}
           {globalParams.service_tier && tierCostBreakdown && (() => {
             // Calculate actual LLM cost from individual agents
-            const actualLLMCost = getActualLLMCost();
+            const actualLLMCost = getActualLLMCost().total;
 
             // Calculate actual total cost (replace backend's incorrect LLM cost with actual sum)
             const actualTotalCost = tierCostBreakdown.infrastructure_costs +
@@ -1458,7 +1470,7 @@ const Design = () => {
 
         {/* Cost Details Tabs */}
         {tierCostBreakdown && (() => {
-          const actualLLMCost = getActualLLMCost();
+          const actualLLMCost = getActualLLMCost().total;
           const actualTotalCost = tierCostBreakdown.infrastructure_costs +
                                  actualLLMCost +
                                  tierCostBreakdown.memory_system_costs +
@@ -1620,45 +1632,133 @@ const Design = () => {
                 )}
 
                 {/* LLM Tab */}
-                {costDetailsTab === 'llm' && (
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-4">LLM Costs from Individual Agents</h3>
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="border-b-2 border-gray-200">
-                            <th className="text-left py-3 px-4 font-semibold text-gray-700">Agent</th>
-                            <th className="text-left py-3 px-4 font-semibold text-gray-700">LLM Model</th>
-                            <th className="text-right py-3 px-4 font-semibold text-gray-700">Usage %</th>
-                            <th className="text-right py-3 px-4 font-semibold text-gray-700">Cost (100%)</th>
-                            <th className="text-right py-3 px-4 font-semibold text-gray-700">Weighted Cost</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {Object.entries(agentConfigs).map(([agentId, config]) => {
-                            const agentInfo = SCIP_AGENTS[agentId];
-                            const agentCost = agentCosts[agentId] || 0;
-                            const weightedCost = agentCost * (config.usage_probability / 100);
+                {costDetailsTab === 'llm' && (() => {
+                  const llmCosts = getActualLLMCost();
+                  
+                  return (
+                    <div className="space-y-6">
+                      {/* Cloud API Costs */}
+                      {llmCosts.cloudApiCost > 0 && (
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                          <h4 className="text-xl font-bold text-blue-900 mb-4 flex items-center">
+                            <Cloud className="w-6 h-6 mr-2" />
+                            Cloud API Costs (Token-Based)
+                          </h4>
+                          
+                          <div className="overflow-x-auto">
+                            <table className="w-full">
+                              <thead className="bg-blue-100">
+                                <tr>
+                                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Agent</th>
+                                  <th className="text-left py-3 px-4 font-semibold text-gray-700">LLM Model</th>
+                                  <th className="text-right py-3 px-4 font-semibold text-gray-700">Usage %</th>
+                                  <th className="text-right py-3 px-4 font-semibold text-gray-700">Cost (100%)</th>
+                                  <th className="text-right py-3 px-4 font-semibold text-gray-700">Weighted Cost</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {Object.entries(agentConfigs)
+                                  .filter(([agentId, config]) => config.deployment_type === 'cloud_api')
+                                  .map(([agentId, config]) => {
+                                    const agentInfo = SCIP_AGENTS[agentId];
+                                    const agentCost = agentCosts[agentId] || 0;
+                                    const weightedCost = agentCost * (config.usage_probability / 100);
 
-                            return (
-                              <tr key={agentId} className="border-b border-gray-100 hover:bg-gray-50">
-                                <td className="py-3 px-4 font-medium text-gray-800">{agentInfo?.name || agentId}</td>
-                                <td className="py-3 px-4 text-gray-600">{config.llm || 'N/A'}</td>
-                                <td className="py-3 px-4 text-right text-gray-600">{config.usage_probability}%</td>
-                                <td className="py-3 px-4 text-right font-semibold text-gray-900">{formatCurrency(agentCost)}</td>
-                                <td className="py-3 px-4 text-right font-semibold text-purple-900">{formatCurrency(weightedCost)}</td>
-                              </tr>
-                            );
-                          })}
-                          <tr className="bg-purple-50 font-bold">
-                            <td className="py-3 px-4 text-gray-900" colSpan="4">Total LLM Costs</td>
-                            <td className="py-3 px-4 text-right text-purple-900">{formatCurrency(actualLLMCost)}</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                                    return (
+                                      <tr key={agentId} className="border-b border-gray-100 hover:bg-gray-50">
+                                        <td className="py-3 px-4 font-medium text-gray-800">{agentInfo?.name || agentId}</td>
+                                        <td className="py-3 px-4 text-gray-600">{config.llm || 'N/A'}</td>
+                                        <td className="py-3 px-4 text-right text-gray-600">{config.usage_probability}%</td>
+                                        <td className="py-3 px-4 text-right font-semibold text-gray-900">{formatCurrency(agentCost)}</td>
+                                        <td className="py-3 px-4 text-right font-semibold text-blue-900">{formatCurrency(weightedCost)}</td>
+                                      </tr>
+                                    );
+                                  })}
+                                <tr className="bg-blue-50 font-bold">
+                                  <td className="py-3 px-4 text-gray-900" colSpan="4">Total Cloud API Costs</td>
+                                  <td className="py-3 px-4 text-right text-blue-900">{formatCurrency(llmCosts.cloudApiCost)}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* On-Premise Costs */}
+                      {llmCosts.onPremiseCost > 0 && (
+                        <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200">
+                          <h4 className="text-xl font-bold text-purple-900 mb-4 flex items-center">
+                            <Server className="w-6 h-6 mr-2" />
+                            On-Premise Infrastructure Costs (GPU-Based)
+                          </h4>
+                          
+                          <div className="overflow-x-auto">
+                            <table className="w-full">
+                              <thead className="bg-purple-100">
+                                <tr>
+                                  <th className="text-left py-3 px-4 font-semibold text-gray-700">Agent</th>
+                                  <th className="text-left py-3 px-4 font-semibold text-gray-700">LLM Model</th>
+                                  <th className="text-right py-3 px-4 font-semibold text-gray-700">Usage %</th>
+                                  <th className="text-right py-3 px-4 font-semibold text-gray-700">GPU Cost (100%)</th>
+                                  <th className="text-right py-3 px-4 font-semibold text-gray-700">Weighted Cost</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {Object.entries(agentConfigs)
+                                  .filter(([agentId, config]) => config.deployment_type === 'on_premise')
+                                  .map(([agentId, config]) => {
+                                    const agentInfo = SCIP_AGENTS[agentId];
+                                    const agentCost = agentCosts[agentId] || 0;
+                                    const weightedCost = agentCost * (config.usage_probability / 100);
+
+                                    return (
+                                      <tr key={agentId} className="border-b border-gray-100 hover:bg-gray-50">
+                                        <td className="py-3 px-4 font-medium text-gray-800">{agentInfo?.name || agentId}</td>
+                                        <td className="py-3 px-4 text-gray-600">{config.llm || 'N/A'}</td>
+                                        <td className="py-3 px-4 text-right text-gray-600">{config.usage_probability}%</td>
+                                        <td className="py-3 px-4 text-right font-semibold text-gray-900">{formatCurrency(agentCost)}</td>
+                                        <td className="py-3 px-4 text-right font-semibold text-purple-900">{formatCurrency(weightedCost)}</td>
+                                      </tr>
+                                    );
+                                  })}
+                                <tr className="bg-purple-50 font-bold">
+                                  <td className="py-3 px-4 text-gray-900" colSpan="4">Total On-Premise Infrastructure Costs</td>
+                                  <td className="py-3 px-4 text-right text-purple-900">{formatCurrency(llmCosts.onPremiseCost)}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Combined Total */}
+                      <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200">
+                        <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                          <Zap className="w-6 h-6 mr-2" />
+                          Total AI Processing Costs
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          {llmCosts.cloudApiCost > 0 && (
+                            <div className="text-center p-4 bg-blue-50 rounded-lg">
+                              <div className="text-sm text-blue-600 font-medium">Cloud API</div>
+                              <div className="text-lg font-bold text-blue-900">{formatCurrency(llmCosts.cloudApiCost)}</div>
+                            </div>
+                          )}
+                          {llmCosts.onPremiseCost > 0 && (
+                            <div className="text-center p-4 bg-purple-50 rounded-lg">
+                              <div className="text-sm text-purple-600 font-medium">On-Premise</div>
+                              <div className="text-lg font-bold text-purple-900">{formatCurrency(llmCosts.onPremiseCost)}</div>
+                            </div>
+                          )}
+                          <div className="text-center p-4 bg-gray-100 rounded-lg">
+                            <div className="text-sm text-gray-600 font-medium">Total</div>
+                            <div className="text-lg font-bold text-gray-900">{formatCurrency(llmCosts.total)}</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
 
                 {/* Data Sources Tab */}
                 {costDetailsTab === 'data-sources' && (
